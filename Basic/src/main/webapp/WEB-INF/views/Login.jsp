@@ -7,6 +7,25 @@
 <html>
 <head>
 	<link href="${path}/resources/css/Login.css" rel="stylesheet" >
+	
+	<script type="text/javascript">
+	 function LoginBT(){    	
+	    	if(document.Login.uid.value == ""){
+	    		alert("아이디를 입력하세요");
+	    		document.Login.uid.focus();
+	    		return;
+	    	}else if(document.Login.upass.value == ""){
+	    		alert("비밀번호를 입력하세요");
+	    		document.Login.upass.focus();
+	    		return;
+	    	}else{
+	    		document.Login.action ="<%=request.getContextPath()%>/LoginAction";
+	    		document.Login.method = "post";		
+	    		document.Login.submit();	
+	    	}
+	    	return
+		}
+  	</script>
 </head>
 
  <body>
@@ -16,12 +35,14 @@
 		<div class="rap2">			
 			<content> 
 				<div class="Lo01">
-					<h1 style="margin: 20px 0px 20px 0px; text-align:center;"> Login</h1>
-					<textarea placeholder="ID" maxlength="20" class="Lo02"></textarea>
-					<textarea placeholder="FW" maxlength="20" class="Lo02"></textarea>
-					
-					<a href="file:///C:/Users/apfhd/Desktop/%EA%B0%9C%EC%9D%B8%EC%9A%A9/html/Main%20.html"><button class="Lo03">Login</button></a>				
-					<a href="file:///C:/Users/apfhd/Desktop/%EA%B0%9C%EC%9D%B8%EC%9A%A9/html/Join.html"><button class="Lo03">Join Us</button></a>
+					<form name="Login" >
+						<h1 style="margin: 20px 0px 20px 0px; text-align:center;"> Login</h1>
+						<textarea placeholder="ID" maxlength="20" class="Lo02" name="uid" id="uid"></textarea>
+						<textarea placeholder="FW" maxlength="20" class="Lo02" name="upass" id="upass"></textarea>
+						
+						<button class="Lo03" onclick="LoginBT()">Login</button>				
+						<a href="${path}/Join"><button class="Lo03">Join Us</button></a>
+					</form>
 					
 				</div>
 			</content>	

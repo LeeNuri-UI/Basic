@@ -12,25 +12,25 @@
 	<script type="text/javascript">
 	
 	 function Joint(){    	
-	    	if(document.Join.id.value == ""){
+	    	if(document.Join.uid.value == ""){
 	    		alert("아이디를 입력하세요");
-	    		document.Join.id.focus();
+	    		document.Join.uid.focus();
 	    		return;
-	    	}else if(document.Join.passward.value == ""){
+	    	}else if(document.Join.upass.value == ""){
 	    		alert("비밀번호를 입력하세요");
-	    		document.Join.passward.focus();
+	    		document.Join.upass.focus();
 	    		return;
-	    	}else if(document.Join.name.value == ""){
+	    	}else if(document.Join.uname.value == ""){
 	    		alert("닉네임을 입력하세요");
-	    		document.Join.name.focus();
+	    		document.Join.uname.focus();
 	    		return;
-	    	}else if(document.Join.mail01.value == ""){
+	    	}else if(document.Join.umail01.value == ""){
 	    		alert("이메일을 입력하세요");
-	    		document.Join.mail01.focus();
+	    		document.Join.umail01.focus();
 	    		return;
-	    	}else if(document.Join.mail02.value == ""){
+	    	}else if(document.Join.umail02.value == ""){
 	    		alert("이메일을 입력하세요");
-	    		document.Join.mail02.focus();
+	    		document.Join.umail02.focus();
 	    		return;
 	    	}else{
 	    		alert("가입하시겠습니까?");
@@ -68,21 +68,21 @@
 						<th>아 이 디</th>
 					</tr>   
 					<tr>
-						<td><input type="text" name="id" id="id" class="Jo02"><button class="JoBu01">중복확인</button></td>
+						<td><input type="text" name="uid" id="uid" class="Jo02"><button class="JoBu01">중복확인</button></td>
 					</tr>   
 					 
 					<tr>
 						<th>비밀번호</th>
 					</tr>
 					<tr>   
-						<td><input type="text" name="passward" id="passward" class="Jo02"></td>
+						<td><input type="text" name="upass" id="upass" class="Jo02"></td>
 					</tr>
 					 
 					<tr>
 						<th>닉 네 임</th>
 					</tr>   
 					<tr>
-						<td><input type="text" name="name" id="name" class="Jo02"><button class="JoBu01">중복확인</button></td>
+						<td><input type="text" name="uname" id="uname" class="Jo02"><button class="JoBu01">중복확인</button></td>
 					</tr>
 						 
 					<tr>
@@ -90,8 +90,8 @@
 					</tr>   
 						<tr>
 							<td>
-								<input type="text" name="mail01" id="mail01" class="Jo03"> @
-								<select name="mail02" id="mail02" class="Jo04">
+								<input type="text" name="umail01" id="umail01" class="Jo03"> @
+								<select name="umail02" id="umail02" class="Jo04">
 									<option selected>naver.com</option>
 									<option value=daum.net>daum.net</option>
 									<option value=google.com>google.com</option>
