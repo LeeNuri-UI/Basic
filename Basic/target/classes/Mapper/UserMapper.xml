@@ -11,7 +11,7 @@
         insert into user (uid,upass,uname,umail01,umail02) values(#{uid},#{upass},#{uname},#{umail01},#{umail02})
     </insert>
     
-    <select id="login" resultType="com.Basic.Domain.UserVO">
+    <select id="Login" resultType="com.Basic.Domain.UserVO">
     	select * from user where uid= #{uid} and upass= #{upass}
 	</select>
 	

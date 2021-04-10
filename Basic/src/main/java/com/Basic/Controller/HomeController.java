@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.Basic.Domain.UserVO;
 import com.Basic.Service.UserService;
@@ -15,8 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class HomeController {
@@ -34,7 +34,6 @@ public class HomeController {
 	
 	//회원가입화면
 	@RequestMapping(value = "/Join", method = RequestMethod.GET)
-	
 	public String Join(Locale locale, Model model) {
 		
 		return "/Join";
@@ -69,11 +68,37 @@ public class HomeController {
 	
 	//로그인
 	@RequestMapping(value = "/LoginAction",method=RequestMethod.POST )
-    public String LoginAction(UserVO uv,  HttpServletRequest req, RedirectAttributes rttr) throws Exception{
-        System.out.println("/LoginAction POST방식 입니다. 왔나요?");
+    public String LoginAction(UserVO uv, HttpSession session, HttpServletResponse response)throws IOException,Exception{
+		response.setContentType("text/html; charset=UTF-8");
         
         UService.Login(uv);
-        return "/Main";
+        UserVO UserVO = UService.Login(uv);
+        
+        if(UserVO==null) {
+        	System.out.println("로그인실패");
+    		PrintWriter out = response.getWriter();
+    		out.println("<script>alert('아이디 또는 비밀번호를 확인하세요.');history.go(-1)</script>");
+        }else {       	
+        	session.setAttribute("UserVO", UserVO);
+ 
+            PrintWriter out = response.getWriter();
+    		out.println("<script>document.location.href='/Board/Main';</script>");
+    		out.close();          
+        }
+        return null;
+    }
+	
+	//로그아웃
+	@RequestMapping(value = "/LoginoutAction")
+    public String LoginoutAction(UserVO uv, HttpSession session, HttpServletResponse response)throws IOException,Exception{
+			response.setContentType("text/html; charset=UTF-8"); 
+        	
+			session.invalidate();
+    		PrintWriter out = response.getWriter();
+    		out.println("<script>alert('로그아웃 되었습니다.');</script>");
+    		out.println("<script>document.location.href='/Board/Main';</script>");
+    		out.close();                 
+        return null;
     }
 	
 }

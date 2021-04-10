@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO{
     
     @Override
     public UserVO Login(UserVO uv) throws Exception {
-    	System.out.println("/LoginAction POST방식 입니다. 왔나요?33");
+    	
     	return sqlSession.selectOne(namespace+".Login", uv);
     }
 

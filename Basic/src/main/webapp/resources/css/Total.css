@@ -62,7 +62,16 @@
 		.a{
 		text-decoration:none;
 		}
-		
+		.wellcom{
+			right: 130px;
+			top: 20px; 
+			background-color:rgba(0,0,0,0); /*버튼 배경색 없애기*/
+			border:0; /*선 없애기*/
+			outline:0; /*누를 때 아웃라인 안보이기*/
+			font-size: 0.9em; 
+			font-weight: bold; 
+			position: absolute;
+		}
 		
 		/*footer line css*/
 	

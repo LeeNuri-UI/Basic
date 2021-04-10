@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
     public UserVO Login(UserVO uv) throws Exception {
-		System.out.println("/LoginAction POST방식 입니다. 왔나요?22");
+		
 		return ud.Login(uv);
     }
 

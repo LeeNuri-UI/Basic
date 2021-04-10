@@ -51,7 +51,7 @@
 			<a href="${path}/Login"><button class="divH02">로그인&nbsp;&nbsp;&nbsp;&nbsp;/</button></a>
 			<a href="${path}/Join"><button class="divH03">회원가입</button></a>
 			<div class="divH04">
-				<h2><b>BasicBoard</b></h2>
+				<a href="${path}/Main"><h2><b>BasicBoard</b></h2></a>
 			</div>	
 		</div>	
 	</header>
