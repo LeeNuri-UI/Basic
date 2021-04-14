@@ -20,7 +20,7 @@
 				<button class="divNB01">마이페이지</button> <!--로그인시 마이페이지 로그인안되있음 회원가입-->
 				<div class="divN04">
 					<ul><b>BasicBoard</b>
-						<li><a href="${path}/board/List">TestBoard</a></li>
+						<li><a href="${path}/List">TestBoard</a></li>
 					</ul>		
 				</div>		
 			</div>		
