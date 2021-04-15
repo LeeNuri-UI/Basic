@@ -8,6 +8,8 @@ import com.Basic.DAO.BoardDAO;
 import com.Basic.Domain.BoardVO;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -29,9 +31,11 @@ public class BoardServiceImpl implements BoardService {
 	    }
 	 	
 	 	//상세보기
+	 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	 	@Override
 	    public BoardVO Detail(Integer bnum) throws Exception {
-	 		
+	 		//조회수
+	 		dao.ViewCount(bnum);
 	        return dao.Detail(bnum);
 	    }
 	 	

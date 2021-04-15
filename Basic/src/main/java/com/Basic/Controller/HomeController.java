@@ -163,8 +163,9 @@ public class HomeController {
     public void Detail(@RequestParam("bnum") int bnum,Model model) throws Exception{
 		System.out.println(bnum);
 		
+		
 		BoardVO BoardVO = BService.Detail(bnum);
-				
+			
         model.addAttribute("BoardVO",BoardVO); 
         
         return;

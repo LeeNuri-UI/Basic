@@ -36,6 +36,13 @@ public class BoardDAOImpl implements BoardDAO{
     	return sqlSession.selectOne(namespace+".DetailView", bnum);    	
     }
     
+    //조회수
+    @Override
+	public void ViewCount(int bnum) throws Exception {
+    	
+		sqlSession.update(namespace+".ViewCount", bnum);
+	}
+    
     //수정하기
     @Override
     public void Update(BoardVO bv) throws Exception {

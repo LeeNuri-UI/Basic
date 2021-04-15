@@ -104,7 +104,7 @@
                
                <tr>
                   <td><b>글 제 목 : </b></td>
-                  <td colspan="4"><input type="text" maxlength="100" name="sub" id="sub" class="text01"></td>
+                  <td colspan="4"><input type="text" maxlength="70" name="sub" id="sub" class="text01"></td>
                </tr>
             </table>
             

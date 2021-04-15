@@ -18,4 +18,5 @@ public interface BoardService {
 	public Integer Before(Integer bnum)throws Exception; //이전글
 	
 	public Integer After(Integer bnum)throws Exception; //다음글
+	
 }
