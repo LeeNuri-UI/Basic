@@ -18,8 +18,7 @@ public class BoardServiceImpl implements BoardService {
 	 	@Override
 	    public void BoardInsert(BoardVO bv) throws Exception {
 	    	
-	        dao.BoardInsert(bv);
-	        
+	        dao.BoardInsert(bv);  
 	    }
 	 	
 	 	//리스트
@@ -48,6 +47,20 @@ public class BoardServiceImpl implements BoardService {
 	    public void delete(int bnum) throws Exception {
 	 		
 	        dao.delete(bnum);
+	    }
+	 	
+	 	//이전글
+	 	@Override
+	    public Integer Before(Integer bnum) throws Exception {
+	 		System.out.println("서비스"+bnum);
+	        return dao.Before(bnum);
+	    }
+	 	
+	 	//다음글
+	 	@Override
+	    public Integer After(Integer bnum) throws Exception {
+	 		System.out.println("서비스"+bnum);
+	        return dao.After(bnum);
 	    }
 
 }

@@ -22,32 +22,46 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.insert(namespace+".BoardInsert", bv);
 	}    
 	
+	//리스트
     @Override
     public List<BoardVO> ListAll() throws Exception {
         
-        return sqlSession.selectList(namespace+".ListBoard");
-        
+        return sqlSession.selectList(namespace+".ListBoard");    
     }
     
+    //상세보기
     @Override
     public BoardVO Detail(Integer bnum) throws Exception {
     	
-    	return sqlSession.selectOne(namespace+".DetailView", bnum);    
-    	
+    	return sqlSession.selectOne(namespace+".DetailView", bnum);    	
     }
     
+    //수정하기
     @Override
     public void Update(BoardVO bv) throws Exception {
     	
-    	sqlSession.update(namespace+".UpdateBoard", bv);    
-    	
+    	sqlSession.update(namespace+".UpdateBoard", bv);     	
 	}
     
+    //삭제하기
     @Override
     public void delete(int bnum) throws Exception {
     	
-    	sqlSession.update(namespace+".delete", bnum);    
-    	
+    	sqlSession.update(namespace+".delete", bnum);    	
+	}
+    
+    //이전글
+    @Override
+    public Integer Before(Integer bnum) throws Exception {
+    	System.out.println("DAO"+bnum);
+    	return sqlSession.selectOne(namespace+".Before", bnum);    	
+	}
+    
+    //다음글
+    @Override
+    public Integer After(Integer bnum) throws Exception {
+    	System.out.println("DAO"+bnum);
+    	return sqlSession.selectOne(namespace+".After", bnum);    	
 	}
 
 }

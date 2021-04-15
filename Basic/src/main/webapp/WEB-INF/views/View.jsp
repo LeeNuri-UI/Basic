@@ -83,9 +83,9 @@
 		</nav>		
 			
 		<content> 
-            <a href="" style="margin-left:660px;"><button class="ViBu01">이전</button></a>
+            <a href="${path}/Before?bnum=${BoardVO.bnum}" style="margin-left:660px;"><button class="ViBu01">이전</button></a>
 			<a href="${path}/List"><button class="ViBu01">목록</button></a>
-			<a href=""><button class="ViBu01">다음</button></a>
+			<a href="${path}/After?bnum=${BoardVO.bnum}"><button class="ViBu01">다음</button></a>
 			 
 				<table class="Vitable01">
 					<tr>

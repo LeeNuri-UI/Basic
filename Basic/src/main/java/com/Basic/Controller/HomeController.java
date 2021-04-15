@@ -128,6 +128,7 @@ public class HomeController {
         return null;
     }
 	
+	
 	//게시판 관리
 	//글쓰기
 	@RequestMapping(value = "/WriteAction",method=RequestMethod.POST )
@@ -186,5 +187,36 @@ public class HomeController {
 		return "redirect:/List";
 	}
 	
+	//이전글
+	@RequestMapping(value = "/Before", method=RequestMethod.GET)
+	public void Before(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
+		response.setContentType("text/html; charset=UTF-8"); 
+			
+		Integer board = BService.Before(bnum);		
+		
+		if(board == null) {
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('가장 처음 글입니다.');history.go(-1)</script>");
+			out.close();
+		}else if(board != null) {
+			response.sendRedirect(request.getContextPath()+"/View?bnum="+board);
+		}
+	}
+	
+	//다음글
+	@RequestMapping(value = "/After", method=RequestMethod.GET)
+	public void After(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
+		response.setContentType("text/html; charset=UTF-8"); 
+			
+		Integer board = BService.After(bnum);		
+		
+		if(board == null) {
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('가장 마지막 글입니다.');history.go(-1)</script>");
+			out.close();
+		}else if(board != null) {
+			response.sendRedirect(request.getContextPath()+"/View?bnum="+board);
+		}
+	}
 }
 

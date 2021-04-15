@@ -41,7 +41,7 @@
         update board set cate01=#{cate01} ,cate02=#{cate02} ,sub=#{sub} ,content=#{content} where bnum = #{bnum}
     </update>
     
-    <!-- 게시판 삭제하기 -->
+    <!-- 게시판 글 삭제하기 -->
     <update id="delete" parameterType="int">
         update board set delyn="Y" where bnum = #{bnum}
     </update>
@@ -50,5 +50,19 @@
     <delete id="deleteRal" parameterType="int">
     	delete from board where bnum = #{bnum}
     </delete>
+    
+    <!-- 이전글 -->
+    <select id="Before" resultType="Integer">    
+    <![CDATA[
+    	select max(bnum) as bnum from board where bnum < #{bnum} and delyn = "N"   
+    ]]>
+	</select>
+	
+	<!-- 다음글 -->
+    <select id="After" resultType="Integer">    
+    <![CDATA[
+    	select min(bnum) as bnum from board where bnum > #{bnum} and delyn = "N"   
+    ]]>
+	</select>
 
 </mapper>
