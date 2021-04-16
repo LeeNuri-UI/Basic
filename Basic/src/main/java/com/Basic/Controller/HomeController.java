@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -78,7 +79,7 @@ public class HomeController {
     public String JoinAction(UserVO uv, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
         System.out.println("/JoinAction POST방식 입니다. 왔나요?");
         
-        //Inject된 UserService를 실행.
+      //Inject된 UserService를 실행.
         UService.Insert(uv);
 		
         //회원가입되었음을 출력
@@ -90,6 +91,28 @@ public class HomeController {
         
 		return null;
     }
+	
+	//아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value="/idChk", method = RequestMethod.POST)
+	public int idChk(UserVO uv) throws Exception {
+		
+		int result = UService.idChk(uv);
+		
+		System.out.println("왔나요?"+result);
+		return result;
+	}
+	
+	//닉네임 중복 체크
+	@ResponseBody
+	@RequestMapping(value="/unameChk", method = RequestMethod.POST)
+	public int unameChk(UserVO uv) throws Exception {
+		
+		int result = UService.unameChk(uv);
+		
+		System.out.println("왔나요?"+result);
+		return result;
+	}
 	
 	//로그인
 	@RequestMapping(value = "/LoginAction",method=RequestMethod.POST )

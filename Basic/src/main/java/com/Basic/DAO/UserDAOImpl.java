@@ -26,11 +26,29 @@ public class UserDAOImpl implements UserDAO{
         
         sqlSession.insert(namespace+".UserInsert", uv);
     }
+    //아이디 중복 체크
+    @Override
+    public int idChk(UserVO uv) throws Exception {
+    	
+    	int result = sqlSession.selectOne(namespace+".idChk", uv);
+    	return result;
+    }
     
+    //닉네임 중복 체크
+    @Override
+    public int unameChk(UserVO uv) throws Exception {
+    	
+    	int result = sqlSession.selectOne(namespace+".unameChk", uv);
+    	return result;
+    }
+    
+    //로그인
     @Override
     public UserVO Login(UserVO uv) throws Exception {
     	
     	return sqlSession.selectOne(namespace+".Login", uv);
     }
+    
+   
 
 }

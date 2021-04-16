@@ -164,6 +164,20 @@
 		    <artifactId>spring-tx</artifactId>
 		    <version>3.1.1.RELEASE</version>
 		</dependency>
+		
+		<!-- ajax susess 리턴을 위한 lib추가 -->
+		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+		<!-- ajax susess 리턴을 위한 lib추가 종료-->
 		        
 	</dependencies>
     <build>
