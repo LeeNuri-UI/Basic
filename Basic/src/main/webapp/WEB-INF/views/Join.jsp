@@ -113,16 +113,7 @@
 
 <body>
 	<div class="rap">
-	<header>
-		<div style="position: relative;">
-			<a href="${path}/Main"><img src="${path}/resources/img/MainLine.PNG" class="divH01" alt="Mainheader"></a>	
-			<a href="${path}/Login"><button class="divH02">로그인&nbsp;&nbsp;&nbsp;&nbsp;/</button></a>
-			<a href="${path}/Join"><button class="divH03">회원가입</button></a>
-			<div class="divH04">
-				<a href="${path}/Main"><h2><b>BasicBoard</b></h2></a>
-			</div>	
-		</div>	
-	</header>
+	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 	<div class="rap2">			
 		<content> 

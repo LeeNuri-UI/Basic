@@ -7,7 +7,7 @@
 <mapper namespace="com.Basic.Mapper.UserMapper">
  
     <!-- 회원가입 -->
-    <insert id="UserInsert">
+    <insert id="userInsert">
         insert into user (uid,upass,uname,umail01,umail02) values(#{uid},#{upass},#{uname},#{umail01},#{umail02})
     </insert>
     
@@ -22,20 +22,19 @@
 	</select>
     
     <!-- 로그인 -->
-    <select id="Login" resultType="com.Basic.Domain.UserVO">
+    <select id="login" resultType="com.Basic.Domain.UserVO">
     	select * from user where uid= #{uid} and upass= #{upass}
 	</select>
 	
 	<!-- 글 작성 -->
-	<insert id="BoardInsert">
+	<insert id="boardInsert">
         insert into board (unum,uname,sub,content,cate01,cate02,writedate,file,delyn) 
         values(#{unum},#{uname},#{sub},#{content},#{cate01},#{cate02},SYSDATE(),#{file},"N")
     </insert>
     
     <!-- 게시판 리스트보기 -->
-    <select id="ListBoard" resultType="com.Basic.Domain.BoardVO">
-    <![CDATA[
-    
+    <select id="listAll" resultType="com.Basic.Domain.BoardVO">
+    <![CDATA[    
         select * from board where delyn = "N"
         order by bnum DESC limit #{pageStart}, #{perPageNum}
     ]]>
@@ -49,17 +48,17 @@
     </select>
     
     <!-- 게시판 상세보기 -->
-    <select id="DetailView" resultType="com.Basic.Domain.BoardVO">
+    <select id="detailView" resultType="com.Basic.Domain.BoardVO">
             select * from board where bnum = #{bnum} and delyn = "N"
     </select>
     
     <!-- 조회수 -->
-   	<update id="ViewCount" parameterType="int">
+   	<update id="viewCount" parameterType="int">
     	update board set viewcount = viewcount+1 where bnum = #{bnum}
     </update>
     	
 	<!-- 게시판 수정하기 -->
-    <update id="UpdateBoard" parameterType="com.Basic.Domain.BoardVO">
+    <update id="updateBoard" parameterType="com.Basic.Domain.BoardVO">
         update board set cate01=#{cate01} ,cate02=#{cate02} ,sub=#{sub} ,content=#{content} where bnum = #{bnum}
     </update>
     
@@ -74,14 +73,14 @@
     </delete>
     
     <!-- 이전글 -->
-    <select id="Before" resultType="Integer">    
+    <select id="before" resultType="Integer">    
     <![CDATA[
     	select max(bnum) as bnum from board where bnum < #{bnum} and delyn = "N"   
     ]]>
 	</select>
 	
 	<!-- 다음글 -->
-    <select id="After" resultType="Integer">    
+    <select id="after" resultType="Integer">    
     <![CDATA[
     	select min(bnum) as bnum from board where bnum > #{bnum} and delyn = "N"   
     ]]>

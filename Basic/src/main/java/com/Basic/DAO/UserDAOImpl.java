@@ -22,9 +22,9 @@ public class UserDAOImpl implements UserDAO{
 	
 	//회원가입
     @Override
-    public void Insert(UserVO uv) throws Exception {
+    public void insert(UserVO uv) throws Exception {
         
-        sqlSession.insert(namespace+".UserInsert", uv);
+        sqlSession.insert(namespace+".userInsert", uv);
     }
     //아이디 중복 체크
     @Override
@@ -44,9 +44,9 @@ public class UserDAOImpl implements UserDAO{
     
     //로그인
     @Override
-    public UserVO Login(UserVO uv) throws Exception {
+    public UserVO login(UserVO uv) throws Exception {
     	
-    	return sqlSession.selectOne(namespace+".Login", uv);
+    	return sqlSession.selectOne(namespace+".login", uv);
     }
     
    

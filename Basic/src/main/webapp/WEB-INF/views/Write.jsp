@@ -6,8 +6,6 @@
 <html>
 <head>
 	<link href="${path}/resources/css/Total.css" rel="stylesheet" >
-	<link href="${path}/resources/css/Join.css" rel="stylesheet" >
-	<link href="${path}/resources/css/Nav.css" rel="stylesheet" >
 	<link href="${path}/resources/css/Write.css" rel="stylesheet" >
 	
 	<script type="text/javascript">
@@ -32,10 +30,8 @@
 	    	}else{
 	    		alert("작성하시겠습니까?");
 	    		document.Write.action ="<%=request.getContextPath()%>/WriteAction";
-	    		document.Write.method = "post";		
-	    		document.Write.submit();	
+	    		document.Write.method = "post";			
 	    	}
-	    	return
 		}
 	 
 	 
@@ -48,40 +44,10 @@
 
 <body>
 	<div class="rap">
-	<header>
-		<div style="position: relative;">
-			<a href="${path}/Main"><img src="${path}/resources/img/MainLine.PNG" class="divH01" alt="Mainheader"></a>	
-				<c:if test ="${empty UserVO}">
-					<a href="${path}/Login"><button class="divH02">로그인&nbsp;&nbsp;&nbsp;&nbsp;/</button></a>
-					<a href="${path}/Join"><button class="divH03">회원가입</button></a>
-				</c:if>
-				
-				<c:if test ="${!empty UserVO}">
-					<p class="wellcom">${UserVO.uname}님 환영합니다.</p>
-					<a href="${path}/LoginoutAction"><button class="divH03">로그아웃</button></a>
-				</c:if>
-			
-			<div class="divH04">
-				<a href="${path}/Main"><h2><b>BasicBoard</b></h2></a>
-			</div>	
-		</div>	
-	</header>
+	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 	<div class="rap2">
-		<nav>	
-			<div class="divN02">
-				<img src="${path}/resources/img/MainLine.PNG" class="divN01" alt="Mainheader">
-				<div class="divN03">
-					 그냥 블로그처럼 <br> 만들고 싶었어요 <br> 기본 게시판이니까 <br>
-					<button class="divNB01">마이페이지</button> <!--로그인시 마이페이지 로그인안되있음 회원가입-->
-					<div class="divN04">
-						<ul><b>BasicBoard</b>
-							<li><a href="${path}/List">TestBoard</a></li>
-						</ul>		
-					</div>		
-				</div>		
-			</div>
-		</nav>	
+		<jsp:include page="Nav.jsp" flush="true"/>	
 				
 		<content> 
 			<form name="Write">

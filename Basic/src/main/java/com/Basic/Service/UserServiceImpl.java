@@ -15,9 +15,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입
 	@Override
-    public void Insert(UserVO uv) throws Exception {
+    public void insert(UserVO uv) throws Exception {
 		
-		ud.Insert(uv); 
+		ud.insert(uv); 
     }
 	
 	//아이디 중복체크
@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService {
 	
 	//로그인
 	@Override
-    public UserVO Login(UserVO uv) throws Exception {
+    public UserVO login(UserVO uv) throws Exception {
 		
-		return ud.Login(uv);
+		return ud.login(uv);
     }
 
 }

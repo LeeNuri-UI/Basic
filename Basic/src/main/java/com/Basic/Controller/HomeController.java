@@ -21,7 +21,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,45 +37,51 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Inject
-    private UserService UService;
+    private UserService uService;
 	@Inject
-    private BoardService BService;
-    
+    private BoardService bService;
+	
+	//@RequestMapping(value="/unameChk", method = RequestMethod.POST) ->@PostMapping("/")로 바꿈 GET도 마찬가지
+	
+	@GetMapping("/")
+	public String intro() {
+		return "redirect:/Main";
+	}	
 
 	//각 화면 JSP이동
 	//메인 화면
-	@RequestMapping(value = "/Main", method = RequestMethod.GET)
-	public String Main(Locale locale, Model model) {
+	@GetMapping("/Main")
+	public String main(Locale locale, Model model) {
 		
 		return "/Main";
 	}
 	
 	//회원가입 화면
-	@RequestMapping(value = "/Join", method = RequestMethod.GET)
-	public String Join(Locale locale, Model model) {
+	@GetMapping("/Join")
+	public String join(Locale locale, Model model) {
 		
 		return "/Join";
 	}
 	
 	//로그인 화면
-	@RequestMapping(value = "/Login", method = RequestMethod.GET)
-	public String Login(Locale locale, Model model) {
+	@GetMapping("/Login")
+	public String login(Locale locale, Model model) {
 		
 		return "/Login";
 	}
 	
 	//글 작성하기 화면
-	@RequestMapping(value = "/Write", method = RequestMethod.GET)
+	@GetMapping("/Write")
 	public String write(Locale locale, Model model) {
 		
 		return "/Write";
 	}
 	
 	//글 수정하기 화면
-	@RequestMapping(value = "/BoardModi", method = RequestMethod.GET)
-	public String BoardModi(int bnum,Model model) throws Exception {
+	@GetMapping("/BoardModi")
+	public String boardModi(int bnum,Model model) throws Exception {
        
-		BoardVO BoardVO = BService.Detail(bnum);
+		BoardVO BoardVO = bService.detail(bnum);
 		model.addAttribute("BoardVO",BoardVO);
         
 		return "/BoardModi";
@@ -82,29 +90,30 @@ public class HomeController {
 	
 	//User 관리
 	//회원가입
-	@RequestMapping(value = "/JoinAction",method=RequestMethod.POST )
-    public String JoinAction(UserVO uv, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
+	@GetMapping("/JoinAction")
+    public String joinAction(UserVO uv, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
         System.out.println("/JoinAction POST방식 입니다. 왔나요?");
         
       //Inject된 UserService를 실행.
-        UService.Insert(uv);
+        uService.insert(uv);
 		
         //회원가입되었음을 출력
         response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		
+        PrintWriter out = response.getWriter();
 		out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
 		out.println("<script>document.location.href='"+request.getContextPath()+"/Login';</script>");
 		out.close();
         
 		return null;
     }
-	
+
 	//아이디 중복 체크
 	@ResponseBody
-	@RequestMapping(value="/idChk", method = RequestMethod.POST)
+	@PostMapping("/idChk")
 	public int idChk(UserVO uv) throws Exception {
 		
-		int result = UService.idChk(uv);
+		int result = uService.idChk(uv);
 		
 		System.out.println("왔나요?"+result);
 		return result;
@@ -112,22 +121,22 @@ public class HomeController {
 	
 	//닉네임 중복 체크
 	@ResponseBody
-	@RequestMapping(value="/unameChk", method = RequestMethod.POST)
+	@PostMapping("/unameChk")
 	public int unameChk(UserVO uv) throws Exception {
 		
-		int result = UService.unameChk(uv);
+		int result = uService.unameChk(uv);
 		
 		System.out.println("왔나요?"+result);
 		return result;
 	}
 	
 	//로그인
-	@RequestMapping(value = "/LoginAction",method=RequestMethod.POST )
-    public String LoginAction(UserVO uv, HttpSession session, HttpServletResponse response)throws IOException,Exception{
+	@PostMapping("/LoginAction")
+    public String loginAction(UserVO uv, HttpSession session, HttpServletResponse response)throws IOException,Exception{
 		response.setContentType("text/html; charset=UTF-8");
         
-        UService.Login(uv);
-        UserVO UserVO = UService.Login(uv);
+		uService.login(uv);
+        UserVO UserVO = uService.login(uv);
         
         if(UserVO==null) {
         	System.out.println("로그인실패");
@@ -161,8 +170,8 @@ public class HomeController {
 	
 	//게시판 관리
 	//글쓰기
-	@RequestMapping(value = "/WriteAction",method=RequestMethod.POST )
-		public String WriteAction(BoardVO bv, HttpSession session, RedirectAttributes rttr) throws Exception{
+	@PostMapping("/WriteAction")
+		public String writeAction(BoardVO bv, HttpSession session, RedirectAttributes rttr) throws Exception{
 		    System.out.println(bv);
 		    
 		    //session 부르고 값 BoardVO에 저장하기
@@ -172,7 +181,7 @@ public class HomeController {
 			bv.setUnum(unum);
 			bv.setUname(uname);
 		
-			BService.BoardInsert(bv);
+			bService.boardInsert(bv);
 		
 			rttr.addFlashAttribute("msg", "성공");
 		
@@ -180,15 +189,16 @@ public class HomeController {
 	}
 	
 	//리스트화면
-	@RequestMapping(value = "/List", method=RequestMethod.GET)
-    public String ListAll(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
+	@GetMapping("/List")
+    public String listAll(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
         System.out.println("전체목록 페이지");
         logger.info(cri.toString());
-        model.addAttribute("BoardList", BService.ListAll(cri));
+       
+        model.addAttribute("BoardList", bService.listAll(cri));
         
         PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(BService.listCount());
+		pageMaker.setTotalCount(bService.listCount());
 		
 		model.addAttribute("pageMaker", pageMaker);
         
@@ -196,12 +206,11 @@ public class HomeController {
     }
 	
 	//글 상세보기
-	@RequestMapping(value = "/View", method=RequestMethod.GET)
-    public void Detail(@RequestParam("bnum") int bnum,Model model) throws Exception{
+	@GetMapping("/View")
+    public void detail(@RequestParam("bnum") int bnum,Model model) throws Exception{
 		System.out.println(bnum);
-		
-		
-		BoardVO BoardVO = BService.Detail(bnum);
+			
+		BoardVO BoardVO = bService.detail(bnum);
 			
         model.addAttribute("BoardVO",BoardVO); 
         
@@ -209,28 +218,28 @@ public class HomeController {
     }
 	
 	//글 수정하기 POST
-	@RequestMapping(value = "/UpdateAction", method=RequestMethod.POST)
-    public String UpdateAction(BoardVO bv,Model model) throws Exception{
-		BService.Update(bv);
+	@PostMapping("/UpdateAction")
+    public String updateAction(BoardVO bv,Model model) throws Exception{
+		bService.update(bv);
 		
         return "redirect:/List";
     }
 	
 	//글 삭제하기
-	@RequestMapping(value = "/delete", method=RequestMethod.GET)
+	@GetMapping("/delete")
 	public String getDelete(@RequestParam("bnum") int bnum) throws Exception{
 		
-		BService.delete(bnum);
+		bService.delete(bnum);
 		
 		return "redirect:/List";
 	}
 	
 	//이전글
-	@RequestMapping(value = "/Before", method=RequestMethod.GET)
-	public void Before(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
+	@GetMapping("/Before")
+	public void before(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
 		response.setContentType("text/html; charset=UTF-8"); 
 			
-		Integer board = BService.Before(bnum);		
+		Integer board = bService.before(bnum);		
 		
 		if(board == null) {
 			PrintWriter out = response.getWriter();
@@ -242,11 +251,11 @@ public class HomeController {
 	}
 	
 	//다음글
-	@RequestMapping(value = "/After", method=RequestMethod.GET)
-	public void After(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
+	@GetMapping("/After")
+	public void after(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
 		response.setContentType("text/html; charset=UTF-8"); 
 			
-		Integer board = BService.After(bnum);		
+		Integer board = bService.after(bnum);		
 		
 		if(board == null) {
 			PrintWriter out = response.getWriter();

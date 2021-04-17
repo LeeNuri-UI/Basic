@@ -17,18 +17,18 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Inject
 	private BoardDAO dao;
-	    
+	    //글 작성
 	 	@Override
-	    public void BoardInsert(BoardVO bv) throws Exception {
+	    public void boardInsert(BoardVO bv) throws Exception {
 	    	
-	        dao.BoardInsert(bv);  
+	        dao.boardInsert(bv);  
 	    }
 	 	
 	 	//리스트
 	 	@Override
-	    public List<BoardVO> ListAll(Criteria cri) throws Exception {
+	    public List<BoardVO> listAll(Criteria cri) throws Exception {
 	 
-	        return dao.ListAll(cri);
+	        return dao.listAll(cri);
 	    }
 	 	
 	 	//총 갯수
@@ -41,17 +41,17 @@ public class BoardServiceImpl implements BoardService {
 	 	//상세보기
 	 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	 	@Override
-	    public BoardVO Detail(Integer bnum) throws Exception {
+	    public BoardVO detail(Integer bnum) throws Exception {
 	 		//조회수
-	 		dao.ViewCount(bnum);
-	        return dao.Detail(bnum);
+	 		dao.viewCount(bnum);
+	        return dao.detail(bnum);
 	    }
 	 	
 	 	//수정하기
 	 	@Override
-	    public void Update(BoardVO bv) throws Exception {
+	    public void update(BoardVO bv) throws Exception {
 	 		
-	        dao.Update(bv);
+	        dao.update(bv);
 	    }
 	 	
 	 	//삭제하기
@@ -63,16 +63,16 @@ public class BoardServiceImpl implements BoardService {
 	 	
 	 	//이전글
 	 	@Override
-	    public Integer Before(Integer bnum) throws Exception {
+	    public Integer before(Integer bnum) throws Exception {
 	 		System.out.println("서비스"+bnum);
-	        return dao.Before(bnum);
+	        return dao.before(bnum);
 	    }
 	 	
 	 	//다음글
 	 	@Override
-	    public Integer After(Integer bnum) throws Exception {
+	    public Integer after(Integer bnum) throws Exception {
 	 		System.out.println("서비스"+bnum);
-	        return dao.After(bnum);
+	        return dao.after(bnum);
 	    }
 
 }

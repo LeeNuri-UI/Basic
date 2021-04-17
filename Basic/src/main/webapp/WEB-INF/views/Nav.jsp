@@ -8,7 +8,6 @@
 <head>
 	<link href="${path}/resources/css/Total.css" rel="stylesheet" >
 	<link href="${path}/resources/css/Nav.css" rel="stylesheet" >
-	<link href="${path}/resources/css/Tab.css" rel="stylesheet" >
 </head>
 
  <body>
