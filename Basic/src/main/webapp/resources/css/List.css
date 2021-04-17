@@ -62,6 +62,13 @@
 			background-color: #ffffff;
 	     }
 	     a { text-decoration:none }
+	     
+	     .ulclass{
+	     	text-align:center;
+	     }
+	     .liclass{
+	     	display:inline-block;
+	     }
 			
 			
 

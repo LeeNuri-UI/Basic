@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.Basic.Domain.BoardVO;
+import com.Basic.Domain.Criteria;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -24,10 +25,18 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//리스트
     @Override
-    public List<BoardVO> ListAll() throws Exception {
+    public List<BoardVO> ListAll(Criteria cri) throws Exception {
         
-        return sqlSession.selectList(namespace+".ListBoard");    
+        return sqlSession.selectList(namespace+".ListBoard",cri);    
+    } 
+    
+    @Override
+    public int listCount() throws Exception {
+        
+        return sqlSession.selectOne(namespace+".listCount");    
     }
+    
+    
     
     //상세보기
     @Override
@@ -70,5 +79,6 @@ public class BoardDAOImpl implements BoardDAO{
     	System.out.println("DAO"+bnum);
     	return sqlSession.selectOne(namespace+".After", bnum);    	
 	}
+    
 
 }

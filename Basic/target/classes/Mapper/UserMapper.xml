@@ -37,7 +37,14 @@
     <![CDATA[
     
         select * from board where delyn = "N"
-        order by bnum DESC 
+        order by bnum DESC limit #{pageStart}, #{perPageNum}
+    ]]>
+    </select>
+    
+    <!-- 총 갯수 -->
+    <select id="listCount" resultType="int">
+    <![CDATA[
+        SELECT COUNT(*) FROM board WHERE bnum > 0 and delyn = "N"
     ]]>
     </select>
     
@@ -50,8 +57,7 @@
    	<update id="ViewCount" parameterType="int">
     	update board set viewcount = viewcount+1 where bnum = #{bnum}
     </update>
-    
-	
+    	
 	<!-- 게시판 수정하기 -->
     <update id="UpdateBoard" parameterType="com.Basic.Domain.BoardVO">
         update board set cate01=#{cate01} ,cate02=#{cate02} ,sub=#{sub} ,content=#{content} where bnum = #{bnum}

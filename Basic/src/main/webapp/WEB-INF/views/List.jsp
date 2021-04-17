@@ -56,7 +56,23 @@
 				<c:if test ="${!empty UserVO}">
 					<a href="${path}/Write"><button class="Write01">글쓰기</button></a>
 				</c:if>
-				<p style="float:right; margin:12px 310px 0px 0px;"> | 1 | 2 | 3 | 4 | 5 | </p>
+				
+				<!-- 리스트 페이징 처리 -->
+				<div>
+					<ul class="ulclass">
+						<c:if test="${pageMaker.prev}">
+							<li class="liclass"><a href="List${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+						</c:if> 
+						
+						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+							<li class="liclass"><a href="List${pageMaker.makeQuery(idx)}">${idx}</a></li>
+						</c:forEach>
+						
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li class="liclass"><a href="List${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+						</c:if> 
+					</ul>
+				</div>
 
 			</div>
          </content>   

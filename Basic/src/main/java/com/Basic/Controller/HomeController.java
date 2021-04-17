@@ -12,11 +12,16 @@ import javax.servlet.http.HttpSession;
 
 import com.Basic.Domain.UserVO;
 import com.Basic.Domain.BoardVO;
+import com.Basic.Domain.Criteria;
+import com.Basic.Domain.PageMaker;
 import com.Basic.Service.BoardService;
 import com.Basic.Service.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomeController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Inject
     private UserService UService;
@@ -174,11 +181,18 @@ public class HomeController {
 	
 	//리스트화면
 	@RequestMapping(value = "/List", method=RequestMethod.GET)
-    public void ListAll(BoardVO bv,Model model) throws Exception{
-        
+    public String ListAll(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
         System.out.println("전체목록 페이지");
+        logger.info(cri.toString());
+        model.addAttribute("BoardList", BService.ListAll(cri));
         
-        model.addAttribute("BoardList", BService.ListAll());
+        PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(BService.listCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+        
+		return "/List";
     }
 	
 	//글 상세보기
