@@ -99,5 +99,15 @@
 		order by conum DESC		
 		]]>
 	</select>
+	
+	<!-- 댓글 수정 -->
+    <update id="updateComments" parameterType="com.Basic.Domain.BoCommentVO">
+        update bocomment set cocontent=#{cocontent} where conum = #{conum} and delyn = "N"
+    </update>
+    
+    <!-- 댓글 삭제 -->
+    <update id="deleteComments" parameterType="int">
+        update bocomment set delyn="Y" where conum = #{conum}
+    </update>
 		
 </mapper>

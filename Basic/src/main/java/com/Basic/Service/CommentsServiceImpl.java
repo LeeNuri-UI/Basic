@@ -28,4 +28,18 @@ public class CommentsServiceImpl implements CommentsService {
     	
 		return cdao.list(bnum);	
     }
+	
+	//댓글 수정
+	@Override
+    public void updateComments(BoCommentVO bcv) throws Exception {
+    	
+		cdao.updateComments(bcv);	
+    }
+	
+	//댓글 삭제
+	@Override
+    public void deleteComments(int conum) throws Exception {
+    	
+		cdao.deleteComments(conum);	
+    }
 }

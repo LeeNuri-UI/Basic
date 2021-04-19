@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 public class HomeController {
 	
@@ -89,16 +88,6 @@ public class HomeController {
 	public String write(Locale locale, Model model) {
 		
 		return "/Write";
-	}
-	
-	//글 수정하기 화면
-	@GetMapping("/BoardModi")
-	public String boardModi(int bnum,Model model) throws Exception {
-       
-		BoardVO BoardVO = bService.detail(bnum);
-		model.addAttribute("BoardVO",BoardVO);
-        
-		return "/BoardModi";
 	}
 	
 	
@@ -240,6 +229,16 @@ public class HomeController {
         return;
     }
 	
+	//글 수정하기 화면
+	@GetMapping("/BoardModi")
+	public String boardModi(int bnum,Model model) throws Exception {
+       
+		BoardVO BoardVO = bService.detail(bnum);
+		model.addAttribute("BoardVO",BoardVO);
+        
+		return "/BoardModi";
+	}
+	
 	//글 수정하기 POST
 	@PostMapping("/UpdateAction")
     public String updateAction(BoardVO bv,Model model) throws Exception{
@@ -249,9 +248,9 @@ public class HomeController {
     }
 	
 	//글 삭제하기
-	@GetMapping("/delete")
+	@GetMapping("/deleteBoard")
 	public String getDelete(@RequestParam("bnum") int bnum) throws Exception{
-		
+		System.out.println("bnum?"+bnum);
 		bService.delete(bnum);
 		
 		return "redirect:/List";
@@ -296,7 +295,57 @@ public class HomeController {
 		
 		cService.commentsIsert(bcv);
 		
-		return "redirect:/List?bnum="+bcv.getBnum();
+		return "redirect:/View?bnum="+bcv.getBnum();
+	}
+	
+	//댓글 수정하기 화면
+	@GetMapping("/View2")
+    public void detailCMT(@RequestParam("bnum") int bnum,@RequestParam("conum") int conum,Model model, HttpServletRequest request) throws Exception{
+		System.out.println(bnum);
+		System.out.println(conum);
+		
+		BoardVO BoardVO = bService.detail(bnum);
+		
+		String str1 = BoardVO.getContent();
+		str1 = str1.replace("\r\n", "<br>");
+		BoardVO.setContent(str1);
+		
+        model.addAttribute("BoardVO",BoardVO); 
+        
+        //댓글 조회
+        List<BoCommentVO> BoCommentVO = null;
+        BoCommentVO = cService.list(bnum);
+        model.addAttribute("BoCommentVO", BoCommentVO);
+        
+        //수정하기 위한 값 출력
+        int value = Integer.parseInt(request.getParameter("conum"));
+        System.out.println(value);
+        model.addAttribute("value", value);
+                
+        return;
+    }
+	
+	//댓글 수정하기
+	@PostMapping("/CommentsModiAction")
+	public String CommentsModiAction(BoCommentVO bcv,Model model) throws Exception{
+	
+		cService.updateComments(bcv);
+		
+		return "redirect:/View?bnum="+bcv.getBnum();
+	}
+	
+	//댓글 삭제하기
+	@GetMapping("/CommentsDelAction")
+	public void commentsDelAction(@RequestParam("conum") int conum,Model model,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		
+		//메소드
+		cService.deleteComments(conum);
+		
+		//삭제됨을 알린 후 내가 보던 해당 리스트로 이동시킨다.
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('댓글이 삭제되었습니다.');history.go(-3)</script>");
+		out.close();
 	}
 }
 
