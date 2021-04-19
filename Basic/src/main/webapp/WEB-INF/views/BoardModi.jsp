@@ -6,8 +6,6 @@
 <html>
 <head>
 	<link href="${path}/resources/css/Total.css" rel="stylesheet" >
-	<link href="${path}/resources/css/Join.css" rel="stylesheet" >
-	<link href="${path}/resources/css/Nav.css" rel="stylesheet" >
 	<link href="${path}/resources/css/Write.css" rel="stylesheet" >
 	
 	<script type="text/javascript">
@@ -50,24 +48,22 @@
 	<div class="rap">
 	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
-	<div class="rap2">
-		<jsp:include page="Nav.jsp" flush="true"/>	
-				
+	<div class="rap2">		
 		<content> 
 			<form name="Update">
 			<input type="hidden" name="bnum" value="${BoardVO.bnum}">
             <table class="Table01">
                <tr>
-                  <td width="100px"><b>작 성 자 : </b></td>
+                  <td width="100px"><b>WRITER : </b></td>
                   <th width="100px">${UserVO.uname}</th>
-                  <th width="100px">카 테 고 리 : </th>
+                  <th width="100px">CATEGORY : </th>
                   <td width="200px">
-                  		<select style="width:200px; height:26px;" name="cate01" id="cate01">
+                  		<select style="width:170px; height:26px; border:none;"name="cate01" id="cate01">
                         <option value="BasicBoard">BasicBoard</option>
                         </select>
                   </td>
                   <td width="270px">
-                  		<select style="width:170px; height:26px;" name="cate02" id="cate02">
+                  		<select style="width:130px; height:26px; border:none;" name="cate02" id="cate02">
                         <option value="${BoardVO.cate02}">${BoardVO.cate02}</option>
                         <option value="TestBoard">TestBoard</option>
                      	</select>
@@ -75,7 +71,7 @@
                </tr>
                
                <tr>
-                  <td><b>글 제 목:</b></td>
+                  <td><b>T I T L E : </b></td>
                   <td colspan="4"><input type="text" maxlength="100" name="sub" id="sub" class="text01" value="${BoardVO.sub}"></td>
                </tr>
             </table>
@@ -91,6 +87,7 @@
 	</div>				
 	
 	<footer>
+		<jsp:include page="Footer.jsp" flush="true"/>
 	</footer>
 	
 	</div>

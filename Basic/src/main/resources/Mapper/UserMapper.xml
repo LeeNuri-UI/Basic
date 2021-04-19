@@ -85,5 +85,19 @@
     	select min(bnum) as bnum from board where bnum > #{bnum} and delyn = "N"   
     ]]>
 	</select>
+	
+	<!-- 글 작성 -->
+	<insert id="commentsIsert">
+        insert into bocomment (bnum,uname,cocontent,codate,delyn) 
+        values(#{bnum},#{uname},#{cocontent},SYSDATE(),"N")
+    </insert>
+    
+    <!-- 댓글 보기 -->
+    <select id="commectsList" parameterType="int" resultType="com.Basic.Domain.BoCommentVO">
+		<![CDATA[
+		select * from bocomment where bnum = #{bnum} and delyn = "N" 
+		order by conum DESC		
+		]]>
+	</select>
 		
 </mapper>

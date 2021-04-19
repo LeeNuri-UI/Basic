@@ -9,27 +9,32 @@
 	<link href="${path}/resources/css/Total.css" rel="stylesheet" >
 	<link href="${path}/resources/css/Nav.css" rel="stylesheet" >
 	
-
 </head>
 
- <body>
-	<header>
-		<div style="position: relative;">
-			<a href="${path}/Main"><img src="${path}/resources/img/MainLine.PNG" class="divH01" alt="Mainheader"></a>	
-				<c:if test ="${empty UserVO}">
-					<a href="${path}/Login"><button class="divH02">로그인&nbsp;&nbsp;&nbsp;&nbsp;/</button></a>
-					<a href="${path}/Join"><button class="divH03">회원가입</button></a>
-				</c:if>
-				
-				<c:if test ="${!empty UserVO}">
-					<p class="wellcom">${UserVO.uname}님 환영합니다.</p>
-					<a href="${path}/LoginoutAction"><button class="divH03">로그아웃</button></a>
-				</c:if>
-			
-			<div class="divH04">
-				<a href="${path}/Main"><h2><b>BasicBoard</b></h2></a>
-			</div>	
-		</div>	
-	</header>	
+<body>
+	<div class="backg" style="background:url(${path}/resources/img/MainLine.PNG)no-repeat;background-attachment:fixed;background-size:100% 400px;">
+		<div class="divH04" style="background-attachment:fixed;">
+			<a href="${path}/Main"><b style="background-attachment:fixed;">DailyDiary</b></a>
+		</div>
+	</div>
+	<div class="ullidiv">
+		<ul class="ulli01" style="margin:0px 70px 0px 0px;">
+			<c:if test ="${empty UserVO}">		
+				<li class="ulli"><a href="${path}/Join"><b>JOIN</b></a></li>
+				<li class="ulli"><a href="${path}/Login"><b>LOGIN</b></a></li>
+				<li class="ulli"><a href="${path}/Main"><b>HOME</b></a></li>
+			</c:if>
+			<c:if test ="${UserVO.admin == 'Y'}">
+				<li class="ulli"><a href="${path}/Main"><b>HOME</b></a></li>
+				<li class="ulli"><a href="${path}/LoginoutAction"><b>LOGOUT</b></a></li>
+				<li class="ulli"><b>${UserVO.uname}님 환영합니다.관리자입니다.</b></li>
+			</c:if>
+			<c:if test ="${UserVO.admin == 'N'}">
+				<li class="ulli"><a href="${path}/Main"><b>HOME</b></a></li>
+				<li class="ulli"><a href="${path}/LoginoutAction"><b>LOGOUT</b></a></li>
+				<li class="ulli"><b>${UserVO.uname}님 환영합니다.</b></li>
+			</c:if>
+		</ul>
+	</div>		
 </body>
 </html>

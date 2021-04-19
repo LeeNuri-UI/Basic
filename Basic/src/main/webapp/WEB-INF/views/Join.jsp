@@ -7,7 +7,7 @@
 <head>
 	<link href="${path}/resources/css/Total.css" rel="stylesheet" >
 	<link href="${path}/resources/css/Join.css" rel="stylesheet" >
-	<link href="${path}/resources/css/Total.css" rel="stylesheet" >
+	<link href="${path}/resources/css/nav.css" rel="stylesheet" >
 	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
@@ -175,6 +175,7 @@
 		</content>	
 	</div>				
 		<footer>
+			<jsp:include page="Footer.jsp" flush="false"/>
 		</footer>
 	</div>
 </body>

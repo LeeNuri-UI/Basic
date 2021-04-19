@@ -1,85 +1,161 @@
 @charset "utf-8";
 
 		html {
-			margin:0;
+			width: 800px;
+			margin:0 auto;
 			padding:0;
 			height:100%;
 		}
 		body {
-			width: 1000px; 
+			width: 800px; 
 			margin: 0 auto;
 			height:100%;
 			padding:0;
 			}
-		.rap {	
+		.rap {		
 			display: flex;
 			flex-direction:column;
-			font-family:"고딕";
+			background-color:#FFFFFF;
+			/*font-family:"고딕";*/
 			height:100%;
 		}	
 		.rap2 {	
-			flex:1 0 auto; /*원래 다 채워준다는 의미로 1만 넣어도 되지만 익스플로어 적용을 위해 그냥 1 0 auto를 넣어줌*/
+			background-color:#FFFFFF;
+			flex:1;
 		}
 		
 		
 		/*header line css*/
 	
 		.divH01{
-			width:1000px; height:280px;	
+			width:800px; height:280px;	
 		}	
-		.divH02{
-			right: 200px;
-			top: 10px; 
-			background-color:rgba(0,0,0,0); /*버튼 배경색 없애기*/
-			border:0; /*선 없애기*/
-			outline:0; /*누를 때 아웃라인 안보이기*/
-			font-size: 0.9em; 
-			font-weight: bold; 
-			position: absolute;		
-		}
-		.divH03{
-			right: 120px;
-			top: 10px; 
-			background-color:rgba(0,0,0,0); /*버튼 배경색 없애기*/
-			border:0; /*선 없애기*/
-			outline:0; /*누를 때 아웃라인 안보이기*/
-			font-size: 0.9em; 
-			font-weight: bold; 
-			position: absolute;		
-		}
 		.divH04{
-			left: 100px; 
-			width: 1000px; 
-			bottom: 100px; 
-			font-size: 2em; 
+			width:100%;
+			height:300px;
+			background-attachment:fixed;
+			background-position:center-top;
+			margin:170px 0px 0px 100px;
+			display:table;
+			bottom: 300px; 
+			font-size: 4em; 
 			font-weight: bold; 
-			position: absolute;
 		}
 		
 		a{
 		 text-decoration:none;
 		}
-		.a{
-		text-decoration:none;
+		
+		.ullidiv{
+			top:0;
+			text-align:right;
+			position:fixed;
+			background-color:#ffffff;
+			width:800px;
 		}
-		.wellcom{
-			right: 130px;
-			top: 20px; 
-			background-color:rgba(0,0,0,0); /*버튼 배경색 없애기*/
-			border:0; /*선 없애기*/
-			outline:0; /*누를 때 아웃라인 안보이기*/
-			font-size: 0.9em; 
-			font-weight: bold; 
-			position: absolute;
+		.ulli01 {
+			width:95%;
+			border-bottom: 2px solid #BDBDBD;
+			list-style-type: none;
+			float: left;
+			margin :0px 7px 0px 0px;
 		}
+		.ulli02 {
+			width:95%;
+			list-style-type: none;
+			float: left;
+			margin :0px 7px 0px 0px;
+		}
+		.ulli {
+			list-style-type: none;
+			float: left;
+			float:right;
+			margin :0px 7px 0px 0px;
+		}
+		
+		.backg{
+			width:100%;
+			height:330px;
+			background-size:800px 400px;
+			background:url(MainLine.png)no-repeat;
+			background-attachment:fixed;
+			background-position:center-top;
+			margin:0px auto;
+			display:table;
+		}	
+		.Ndiv01{
+			width:100%;
+			height:40px; 
+			font-size:1em; 
+			padding:10px 0px 0px 0px; 
+			margin:10px 0px 0px 0px;
+		}
+		.Ndiv02{
+			width:97%;
+			height:30px;  
+			margin:0 auto;
+		}
+		.Mdiv03{
+			width:95%; 
+			height:30px;
+			font-size: 1em;
+			padding:0px 10px 10px 10px; 
+			margin:0 auto;
+			color:#6E6E6E;
+			 
+		}
+		.Mdiv04{
+			width:790px;
+			height:30px; 
+			font-size: 1em; 
+			border-bottom: 1px solid #BDBDBD; 
+			padding:0px 0px 0px 10px; 
+			margin:0 auto;
+			margin-bottom:20px;
+			margin-top:10px;
+			margin-right:10px;
+			color:#6E6E6E;
+		}
+		.Introdiv01{
+			width:100%;
+			height:30px; 
+			border-top: 1px solid #BDBDBD; 
+			font-size: 1.7em; 
+			padding:20px 0px 0px 0px; 
+			margin:0 auto;
+		}
+		.Introdiv02{
+			width:97%;
+			height:30px; 
+			font-size: 1.2em; 
+			padding:10px 0px 10px 20px; 
+			margin:0 auto;
+		}
+		.Introdiv03{
+			width:100%;
+			height:7px; 
+			background-color:#F2F2F2;
+			border-bottom: 1px solid #BDBDBD; 
+			border-top: 1px solid #BDBDBD;
+			margin:0 auto;
+			margin-bottom:20px;
+		}
+		span{
+			color:#848484;
+		}
+		
 		
 		/*footer line css*/
 	
 		footer{
-			width: 1000px; 
+			bottom:0;
+			text-align:right;
+			position:fixed;
+			background-color:#ffffff;
+			width:800px; 
 			margin-top : 40px;
-			border-top:3px solid #2E9AFE; 
-			background-color:#F8FEFF;	
-			padding: 72px 0; /*높이가 나오게 padding으로 지정한다 위에서 밀렸으니까 지정하면 브라우저줄이면 커진당*/
+			border-top:1px solid #BDBDBD; 
+			background-color:#FFFEFF;	
+			padding: 0px 0px 0px 0px; /*높이가 나오게 padding으로 지정한다 위에서 밀렸으니까 지정하면 브라우저줄이면 커진당*/
 		}
 	

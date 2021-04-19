@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
+	
 	@Inject
     private SqlSession sqlSession;
 	
@@ -20,7 +21,7 @@ public class BoardDAOImpl implements BoardDAO{
     //게시판추가
 	@Override
     public void boardInsert(BoardVO bv) throws Exception {
-        sqlSession.insert(namespace+".BoardInsert", bv);
+        sqlSession.insert(namespace+".boardInsert", bv);
 	}    
 	
 	//리스트

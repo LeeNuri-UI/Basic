@@ -47,6 +47,7 @@
 		</div>
 		
 		<footer>
+			<jsp:include page="Footer.jsp" flush="false"/>
 		</footer>
 	</div>
 </body>

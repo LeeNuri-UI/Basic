@@ -3,16 +3,17 @@
 	/*View Line CSS*/
 		
 		.Vitable01{
-			width:780px;  
-			margin:10px 0px 0px 0px;
-			border: 0px solid;
+			width:800px;  
+			margin:0px 0px 0px 0px;
 			float:right;
-			background-color:#F8FEFF;			
-			
+			background-color:#FFFEFF;	
+			border-top:1px solid #BDBDBD;		
+			border-bottom:1px solid #BDBDBD;
+			padding:0px 0px 0px 10px
 		}
-		
+		/*
 		.Vi01{
-			width:780px; 
+			width:800px; 
 			border:0px solid; 
 			min-height:470px; 
 			margin:0px 0px 0px 0px; 
@@ -22,16 +23,16 @@
 			white-space:nowrap; 
 			overflow-x:auto;
 			overflow-y:visible;
-		}
+		}*/
 		
 		.Vi02{
-			width:740px; 
+			width:790px; 
 			min-height:400px; 
 			background-color:#ffffff;
 			padding:10px 10px 10px 10px; 
 			resize:none; 
 			height: auto; 
-			margin:0px 0px 0px 10px;  
+			margin:0px 0px 0px 0px;  
 			outline:0; 
 			border-bottom:0px solid #2e9cdf;
 			white-space:nowrap; 
@@ -40,21 +41,23 @@
 		}
 		
 		.Vi03{
-			border-top:2px solid #2e9cdf;  
-			background-color:#F8FEFF;
-			text-align:left; 
-			float:right; 
-			width:770px; 
+			border-top:2px solid #BDBDBD;;  
+			background-color:#ffffff;
+			text-align:left;  
+			width:800px; 
 			padding:3px 0px 3px 10px;
+			margin:40px 0px 0px 0px;
 		}
 		
 		.ViRe01{
-			width:677px; 
-			height:70px; 
+			width:700px; 
+			height:30px; 
 			text-align:left; 
 			outline:0; 
-			border-color:#2e9cdf; 
-			margin: 0px 0px 70px 220px; 
+			border:0px;
+			resize:none;
+			 
+			margin: 0px 0px 0px 0px; 
 			resize:none;
 			padding:5px 10px 0px 10px;
 		}
@@ -62,10 +65,10 @@
 		
 		/*이전 목록 다음 CSS*/
 		.ViBu01{
-			border: 0px solid #A4A4A4;
+			border: 0px solid #F2F2F2;
 			width : 43x; height:23px;
-			background-color:#2e9cdf;
-			color: #ffffff;
+			background-color:#ffffff;
+			color: #000000;
 			border-radius:0.4em;
 			margin-top: 10px;	
 			outline:0;
@@ -77,21 +80,21 @@
 				
 		/*삭제하기 수정하기*/	
 		.ViBu02{ 
-			background-color:#2e9cdf; 
-			border:0px solid #2e9cdf; 
+			background-color:#ffffff; 
+			border:0px solid #F2F2F2; 
 			height:27px;
 			outline:0; 
 			font-size: 0.9em;
-			color: #ffffff;
+			color: #000000;
 			font-weight: bold;
-			margin:10px 10px 10px 0px;
+			margin:0px 10px 0px 0px;
 			float:right; 
 		}
 		.ViBu02:hover{
-			color: #000000;
+			color: #A4A4A4;
 			cursor: pointer;}	
 		
-		/*작성완료*/		
+		/*작성완료		
 		.ViBu03{ 
 			background-color:#2e9cdf; 
 			border:0px solid #2e9cdf; 
@@ -103,7 +106,7 @@
 			font-weight: bold;
 			margin:0px 1px 1px -5px;
 			float:right;
-		}
+		}*/
 		.ViBu03:hover{
 			color: #000000;
 			cursor: pointer;}		
@@ -114,7 +117,8 @@
 		}
 		
 		/*댓글창 버튼 나란히 두기 CSS*/
+		/*
 		textarea,button
 		{
 			vertical-align:middle;
-		}
+		}*/

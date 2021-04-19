@@ -47,46 +47,44 @@
 	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 	<div class="rap2">
-		<jsp:include page="Nav.jsp" flush="true"/>	
-				
 		<content> 
 			<form name="Write">
             <table class="Table01">
                <tr>
-                  <td width="100px"><b>작 성 자 : </b></td>
+                  <td width="100px"><b>WRITER : </b></td>
                   <th width="100px">${UserVO.uname}</th>
-                  <th width="100px">카 테 고 리 : </th>
+                  <th width="100px">CATEGORY : </th>
                   <td width="200px">
-                  		<select style="width:200px; height:26px;" name="cate01" id="cate01">
-                        <option value="BasicBoard">BasicBoard</option>
+                  		<select style="width:170px; height:26px; border:none;"name="cate01" id="cate01">
+                        <option value="BasicBoard">BasicDiary</option>
                         </select>
                   </td>
                   <td width="270px">
-                  		<select style="width:170px; height:26px;" name="cate02" id="cate02">
-                        <option value="TestBoard">TestBoard</option>
+                  		<select style="width:130px; height:26px; border:none;" name="cate02" id="cate02">
+                        <option value="TestBoard">Daily</option>
                      	</select>
                   </td>
                </tr>
                
                <tr>
-                  <td><b>글 제 목 : </b></td>
-                  <td colspan="4"><input type="text" maxlength="70" name="sub" id="sub" class="text01"></td>
+                  <td><b>T I T L E : </b></td>
+                  <td colspan="4"><input type="text" maxlength="70" name="sub" id="sub" class="text01" placeholder="제목을 입력하세요"></td>
                </tr>
             </table>
             
             <div class="Wi01">   
-                <textarea class="textarea" name="content" id="content"></textarea>
+                <textarea class="textarea" name="content" id="content" placeholder="내용을 입력하세요"></textarea>
 				<input type="file" name="file" id="file" accept="image/*,gif/* " class="File01">   
-                <button class="WiBu01" onclick="WriteBT()">작성완료</button>
-                <button class="WiBu02" onclick="goBack()">취소하기</button>
+                <button class="WiBu01" onclick="WriteBT()">WRITE</button>
+                <button class="WiBu02" onclick="goBack()">CANCEl</button>
             </div>  
             </form> 
          </content>  	
 	</div>				
 	
 	<footer>
+		<jsp:include page="Footer.jsp" flush="true"/>
 	</footer>
-	
 	</div>
 </body>
 </html>

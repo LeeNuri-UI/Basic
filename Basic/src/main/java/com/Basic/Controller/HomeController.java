@@ -2,6 +2,7 @@ package com.Basic.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpSession;
 
 
 import com.Basic.Domain.UserVO;
+import com.Basic.Domain.BoCommentVO;
 import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.Criteria;
 import com.Basic.Domain.PageMaker;
 import com.Basic.Service.BoardService;
+import com.Basic.Service.CommentsService;
 import com.Basic.Service.UserService;
 
 import org.slf4j.Logger;
@@ -40,6 +43,9 @@ public class HomeController {
     private UserService uService;
 	@Inject
     private BoardService bService;
+	@Inject
+    private CommentsService cService;
+	
 	
 	//@RequestMapping(value="/unameChk", method = RequestMethod.POST) ->@PostMapping("/")로 바꿈 GET도 마찬가지
 	
@@ -51,8 +57,16 @@ public class HomeController {
 	//각 화면 JSP이동
 	//메인 화면
 	@GetMapping("/Main")
-	public String main(Locale locale, Model model) {
+	public String main(@ModelAttribute("cri") Criteria cri, Model model)throws Exception {
+		logger.info(cri.toString());
+	       
+        model.addAttribute("BoardList", bService.listAll(cri));
+        
+        PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bService.listCount());
 		
+		model.addAttribute("pageMaker", pageMaker);
 		return "/Main";
 	}
 	
@@ -202,7 +216,7 @@ public class HomeController {
 		
 		model.addAttribute("pageMaker", pageMaker);
         
-		return "/List";
+		return "/Main";
     }
 	
 	//글 상세보기
@@ -211,8 +225,17 @@ public class HomeController {
 		System.out.println(bnum);
 			
 		BoardVO BoardVO = bService.detail(bnum);
-			
+		
+		String str1 = BoardVO.getContent();
+		str1 = str1.replace("\r\n", "<br>");
+		BoardVO.setContent(str1);
+		
         model.addAttribute("BoardVO",BoardVO); 
+        
+        //댓글 조회
+        List<BoCommentVO> BoCommentVO = null;
+        BoCommentVO = cService.list(bnum);
+        model.addAttribute("BoCommentVO", BoCommentVO);
         
         return;
     }
@@ -264,6 +287,16 @@ public class HomeController {
 		}else if(board != null) {
 			response.sendRedirect(request.getContextPath()+"/View?bnum="+board);
 		}
+	}
+	
+	//댓글작성
+	@PostMapping("/CommentsAction")
+	public String commentsAction(BoCommentVO bcv, HttpSession session, RedirectAttributes rttr)throws Exception{
+		System.out.println("여기왔나요?");
+		
+		cService.commentsIsert(bcv);
+		
+		return "redirect:/List?bnum="+bcv.getBnum();
 	}
 }
 

@@ -12,7 +12,7 @@
 	
 	<script type="text/javascript">
 	 function No(){    	
-	    	alert("로그인시 이용가능합니다.");
+	    	alert("관리자 권한입니다.");
 	    	return
 		}
 	</script>
@@ -23,7 +23,7 @@
       <jsp:include page="MainHeader.jsp" flush="true"/>	
       
       <div class="rap2">   
-         <jsp:include page="Nav.jsp" flush="true"/>
+         
          
          <content> 
 			<div>
@@ -50,10 +50,10 @@
 					</c:forEach>
 				</table>
 				
-				<c:if test ="${empty UserVO}">
+				<c:if test ="${empty UserVO or UserVO.admin == 'N'}">
 					<button class="Write01" onclick="No()">글쓰기</button>
 				</c:if>
-				<c:if test ="${!empty UserVO}">
+				<c:if test ="${UserVO.admin == 'Y'}">
 					<a href="${path}/Write"><button class="Write01">글쓰기</button></a>
 				</c:if>
 				

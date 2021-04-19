@@ -7,7 +7,9 @@ public class UserVO {
     private String uname;
     private String umail01;
     private String umail02;
+    private String admin;
     
+	
 	public int getUnum() {
 		return unum;
 	}
@@ -43,6 +45,12 @@ public class UserVO {
 	}
 	public void setUmail02(String umail02) {
 		this.umail02 = umail02;
+	}
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 
 }
