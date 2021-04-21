@@ -27,6 +27,7 @@
 
 <body>
 	<div class="rap">
+	<jsp:include page="Background.jsp" flush="true"/>
 	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 	<div class="rap2">			

@@ -1,6 +1,7 @@
 package com.Basic.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
     public void boardInsert(BoardVO bv) throws Exception {
         sqlSession.insert(namespace+".boardInsert", bv);
-	}    
+	}
 	
 	//리스트
     @Override

@@ -1,9 +1,11 @@
 package com.Basic.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import com.Basic.Service.BoardService;
 import com.Basic.Service.CommentsService;
 import com.Basic.Service.UserService;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -184,6 +189,18 @@ public class HomeController {
 			bv.setUnum(unum);
 			bv.setUname(uname);
 		
+			// 파일 업로드 처리
+			String fileName=null;
+			MultipartFile uploadFile = bv.getUploadFile();
+			if (!uploadFile.isEmpty()) {
+				String originalFileName = uploadFile.getOriginalFilename();
+				String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+				UUID uuid = UUID.randomUUID();	//UUID 구하기
+				fileName=uuid+"."+ext;
+				uploadFile.transferTo(new File("C:\\Users\\apfhd\\Desktop\\Spring\\fileName\\" + fileName));
+			}
+			bv.setFile(fileName);
+			
 			bService.boardInsert(bv);
 		
 			rttr.addFlashAttribute("msg", "성공");

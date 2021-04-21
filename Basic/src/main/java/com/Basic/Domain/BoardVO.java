@@ -2,6 +2,8 @@ package com.Basic.Domain;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
 	private int bnum;
 	private int unum;
@@ -14,7 +16,14 @@ public class BoardVO {
 	private Date writedate;
 	private String file;
 	private String delyn;
+	private MultipartFile uploadFile;
 	
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	public int getBnum() {
 		return bnum;
 	}
@@ -81,4 +90,5 @@ public class BoardVO {
 	public void setDelyn(String delyn) {
 		this.delyn = delyn;
 	}
+	
 }

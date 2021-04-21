@@ -38,14 +38,15 @@
 	 
 	 
 	 function goBack() {
-	        window.history.back();
-	    }
+		    window.history.back();
+		}
 		
   </script>
 </head>
 
 <body>
 	<div class="rap">
+	<jsp:include page="Background.jsp" flush="true"/>
 	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 	<div class="rap2">		
@@ -79,8 +80,8 @@
             <div class="Wi01">   
                 <textarea class="textarea" name="content" id="content">${BoardVO.content}</textarea>
 				<input type="file" name="file" id="file" accept="image/*,gif/* " class="File01">   
-                <button class="WiBu01" onclick="UpdateBT()">작성완료</button>
-                <button class="WiBu02" onclick="goBack()">취소하기</button>
+                <button class="WiBu01" onclick="UpdateBT()">WRITE</button>
+                <input type="button" class="WiBu02" value="CANCEl" onclick="goBack()">
             </div>  
             </form> 
          </content>  	

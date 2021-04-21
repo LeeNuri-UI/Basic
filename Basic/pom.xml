@@ -178,6 +178,20 @@
 		    <version>2.9.2</version>
 		</dependency>
 		<!-- ajax susess 리턴을 위한 lib추가 종료-->
+		
+		<!-- file upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		
+		<!-- MultipartHttpServletRequset -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
 		        
 	</dependencies>
     <build>

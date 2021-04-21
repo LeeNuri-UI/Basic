@@ -86,7 +86,7 @@
     ]]>
 	</select>
 	
-	<!-- 글 작성 -->
+	<!-- 댓글 작성 -->
 	<insert id="commentsIsert">
         insert into bocomment (bnum,uname,cocontent,codate,delyn) 
         values(#{bnum},#{uname},#{cocontent},SYSDATE(),"N")

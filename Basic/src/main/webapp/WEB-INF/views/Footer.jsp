@@ -19,7 +19,7 @@
  <body>
 	<ul class="ulli02" style="margin:0px 70px 0px 0px;">
 		<c:if test ="${UserVO.admin == 'Y'}">
-		<li class="ulli"><a href="${path}/Write" >WRITE</a></li>
+		<li class="ulli"><a href="${path}/Write" ><b>WRITE</b></a></li>
 		</c:if>
 		
 		<c:if test ="${empty UserVO or UserVO.admin == 'N'}">

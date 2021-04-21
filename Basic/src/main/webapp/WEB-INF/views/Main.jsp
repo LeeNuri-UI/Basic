@@ -13,6 +13,7 @@
 
  <body>
 	<div class="rap">
+		<jsp:include page="Background.jsp" flush="true"/>
 		<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 		<div class="rap2">
@@ -22,24 +23,56 @@
 			
 			<content> 
 				<c:forEach items="${BoardList}" var="BoardVO">
-					<div class="Mdiv01">
-							<span style="margin:0px 10px 0px 10px;"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/></span>
-							<span style="margin:0px 10px 0px 10px;">카테고리</span>
-							<span style="margin:0px 10px 0px 10px;">${BoardVO.cate02}</span>
-							<span style="margin:0px 10px 0px 10px; float:right;">${BoardVO.viewcount}&nbsp;읽음</span>
-						</div>
-						
-						<div class="Mdiv02" style="padding:10px 0px 0px 20px;">
-							<b style="font-size: 1.7em;"><a href="${path}/View?bnum=${BoardVO.bnum}">${BoardVO.sub}</a></b>
-						</div>	
-						
-						<div class="Mdiv03" style="overflow:hidden;">
-							${BoardVO.content}
-						</div>
-						
-						<div class="Mdiv04">
-							댓글 &nbsp;
-						</div>	
+				<table border="0;" style="width:810px; margin:0px 0px 0px -2px;">
+					<tr>
+						<td colspan="3"style="color:#848484;">&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/>
+						&nbsp;&nbsp;&nbsp;CATEGORY : <b>${BoardVO.cate02}</b></td>
+						<td style="margin:0px 10px 0px 10px; color:#848484; float:right;">${BoardVO.viewcount}&nbsp;읽음</td>
+						<td rowspan="4">${BoardVO.file}</td>
+					</tr>
+					
+					<tr>
+						<td colspan="4">
+							<a href="${path}/View?bnum=${BoardVO.bnum}">&nbsp;&nbsp;<b style="font-size: 1.7em;">${BoardVO.sub}</b></a>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="4" style="color:#848484;">
+							<div style="height:24px; overflow:hidden;">
+								&nbsp;&nbsp;${BoardVO.content}
+							</div>
+						</td>
+					</tr>
+					
+					<tr >
+						<td colspan="4" style="color:#848484;">
+							<div style="height:30px; overflow:hidden; border-bottom:1px solid #BDBDBD; margin:0px 0px 10px 0px;">
+							&nbsp;&nbsp;COMMENTS : &nbsp;
+							</div>
+						</td>
+					</tr>
+				</table>
+							
+				<!--  기존 리스트 방식
+				<div class="Mdiv01">
+						<span style="margin:0px 10px 0px 10px;"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/></span>
+						<span style="margin:0px 10px 0px 10px;">카테고리</span>
+						<span style="margin:0px 10px 0px 10px;">${BoardVO.cate02}</span>
+						<span style="margin:0px 10px 0px 10px; float:right;">${BoardVO.viewcount}&nbsp;읽음</span>
+					</div>
+					
+					<div class="Mdiv02" style="padding:10px 0px 0px 20px;">
+						<b style="font-size: 1.7em;"><a href="${path}/View?bnum=${BoardVO.bnum}">${BoardVO.sub}</a></b>
+					</div>	
+					
+					<div class="Mdiv03" style="overflow:hidden;">
+						${BoardVO.content}
+					</div>
+					
+					<div class="Mdiv04">
+						댓글 &nbsp;
+					</div>	-->
 				</c:forEach>	
 			</content>	
 			<div>

@@ -2,6 +2,8 @@ package com.Basic.Service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.Criteria;
 

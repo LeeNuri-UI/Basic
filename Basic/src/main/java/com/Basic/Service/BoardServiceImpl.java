@@ -1,7 +1,6 @@
 package com.Basic.Service;
 
 import java.util.List;
-
 import javax.inject.Inject;
  
 import com.Basic.DAO.BoardDAO;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 public class BoardServiceImpl implements BoardService {
 	
@@ -20,8 +20,9 @@ public class BoardServiceImpl implements BoardService {
 	    //글 작성
 	 	@Override
 	    public void boardInsert(BoardVO bv) throws Exception {
-	    	
-	        dao.boardInsert(bv);  
+	 		
+	 		dao.boardInsert(bv);
+	 		  
 	    }
 	 	
 	 	//리스트

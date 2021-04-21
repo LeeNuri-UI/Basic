@@ -79,6 +79,11 @@
 			border: 1px solid ;
 			color:#000000;
 			margin: 0px 0px 0px 10px;		
+		}
+		#image_container img{
+			width:200px; 
+			height:200px;
+			margin:10px;
 		}	
 		
 		/*

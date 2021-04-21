@@ -12,11 +12,6 @@
 </head>
 
 <body>
-	<div class="backg" style="background:url(${path}/resources/img/MainLine.PNG)no-repeat;background-attachment:fixed;background-size:100% 400px;">
-		<div class="divH04" style="background-attachment:fixed;">
-			<a href="${path}/Main"><b style="background-attachment:fixed;">DailyDiary</b></a>
-		</div>
-	</div>
 	<div class="ullidiv">
 		<ul class="ulli01" style="margin:0px 70px 0px 0px;">
 			<c:if test ="${empty UserVO}">		

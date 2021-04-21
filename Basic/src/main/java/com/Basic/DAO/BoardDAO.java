@@ -1,6 +1,7 @@
 package com.Basic.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.Criteria;

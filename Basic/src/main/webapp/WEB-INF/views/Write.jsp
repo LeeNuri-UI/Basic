@@ -30,20 +30,21 @@
 	    	}else{
 	    		alert("작성하시겠습니까?");
 	    		document.Write.action ="<%=request.getContextPath()%>/WriteAction";
-	    		document.Write.method = "post";			
+	    		document.Write.enctype = "multipart/form-data";
+	    		document.Write.method = "post";	
 	    	}
 		}
 	 
-	 
 	 function goBack() {
-	        window.history.back();
-	    }
+		    window.history.back();
+		}
 		
   </script>
 </head>
 
 <body>
 	<div class="rap">
+	<jsp:include page="Background.jsp" flush="true"/>
 	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
 	<div class="rap2">
@@ -74,9 +75,25 @@
             
             <div class="Wi01">   
                 <textarea class="textarea" name="content" id="content" placeholder="내용을 입력하세요"></textarea>
-				<input type="file" name="file" id="file" accept="image/*,gif/* " class="File01">   
+				
+				<input type="file" name="uploadFile" id="uploadFile" accept="image/gif, image/jpeg, image/png" onchange="setThumbnail(event);"class="File01"/>
+				
+				<div id="image_container"></div>
+				<!-- 이미지 미리보기 -->
+				<script> 
+					function setThumbnail(event) { 
+						var reader = new FileReader(); 
+						reader.onload = function(event) { 
+							var img = document.createElement("img"); 
+							img.setAttribute("src", event.target.result); 
+							document.querySelector("div#image_container").appendChild(img); 
+						}; 
+						reader.readAsDataURL(event.target.files[0]); 
+					} 
+				</script>
+				
                 <button class="WiBu01" onclick="WriteBT()">WRITE</button>
-                <button class="WiBu02" onclick="goBack()">CANCEl</button>
+                <input type="button" class="WiBu02" value="CANCEl" onclick="goBack()">
             </div>  
             </form> 
          </content>  	
