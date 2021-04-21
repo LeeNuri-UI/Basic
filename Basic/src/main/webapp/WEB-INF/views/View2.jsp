@@ -82,6 +82,7 @@
 					<button class="ViBu02" onclick="cmt()">등록</button>						
 				</div>
 			</form>
+			<!-- 댓글 작성구간 -->
 			
 			<!-- 댓글 View 구간 -->
 			<div style="margin:20px 0px 120px 0px;">

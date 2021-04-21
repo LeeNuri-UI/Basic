@@ -52,6 +52,15 @@
 	     	display:inline-block;
 	     	margin-bottom:30px;
 	     }
+	     .td01{
+	     	margin:0px 10px 0px 10px; 
+	     	color:#848484; float:right;
+	     }
+	     .divCmt{
+	     	height:30px; 
+	     	overflow:hidden;
+	     	margin:0px 0px 10px 0px;
+	     }
 			
 			
 

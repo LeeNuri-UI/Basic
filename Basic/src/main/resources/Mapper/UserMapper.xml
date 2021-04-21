@@ -26,6 +26,8 @@
     	select * from user where uid= #{uid} and upass= #{upass}
 	</select>
 	
+	
+	
 	<!-- 글 작성 -->
 	<insert id="boardInsert">
         insert into board (unum,uname,sub,content,cate01,cate02,writedate,file,delyn) 
@@ -85,6 +87,8 @@
     	select min(bnum) as bnum from board where bnum > #{bnum} and delyn = "N"   
     ]]>
 	</select>
+	
+	
 	
 	<!-- 댓글 작성 -->
 	<insert id="commentsIsert">

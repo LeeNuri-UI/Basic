@@ -23,12 +23,23 @@
 			
 			<content> 
 				<c:forEach items="${BoardList}" var="BoardVO">
-				<table border="0;" style="width:810px; margin:0px 0px 0px -2px;">
+				<table border="0;" style="width:810px; border-bottom:1px solid #BDBDBD; margin:0px 0px 0px -2px;">
 					<tr>
-						<td colspan="3"style="color:#848484;">&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/>
-						&nbsp;&nbsp;&nbsp;CATEGORY : <b>${BoardVO.cate02}</b></td>
-						<td style="margin:0px 10px 0px 10px; color:#848484; float:right;">${BoardVO.viewcount}&nbsp;읽음</td>
-						<td rowspan="4"><img src="${BoardVO.file}"></td>
+						<td colspan="3"style="color:#848484;">
+							&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/>
+							&nbsp;&nbsp;&nbsp;CATEGORY : <b>${BoardVO.cate02}</b>
+						</td>
+						<td class="td01">
+							${BoardVO.viewcount}&nbsp;읽음
+						</td>
+						
+						<c:if test ="${!empty BoardVO.file}">
+						<td rowspan="4" style="width:133px;">
+							<span>
+								<img src="${path}/images/${BoardVO.file}" style="width:127px; height:127px;"/>
+							</span>
+						</td>
+						</c:if>
 					</tr>
 					
 					<tr>
@@ -45,17 +56,18 @@
 						</td>
 					</tr>
 					
-					<tr >
+					<tr>
 						<td colspan="4" style="color:#848484;">
-							<div style="height:30px; overflow:hidden; border-bottom:1px solid #BDBDBD; margin:0px 0px 10px 0px;">
-							&nbsp;&nbsp;COMMENTS : &nbsp;
+							<div class="divCmt">
+								&nbsp;&nbsp;COMMENTS : &nbsp;
 							</div>
 						</td>
 					</tr>
 				</table>
-							
-				<!--  기존 리스트 방식
-				<div class="Mdiv01">
+				</c:forEach>			
+				
+					<!--  기존 리스트 방식
+					<div class="Mdiv01">
 						<span style="margin:0px 10px 0px 10px;"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/></span>
 						<span style="margin:0px 10px 0px 10px;">카테고리</span>
 						<span style="margin:0px 10px 0px 10px;">${BoardVO.cate02}</span>
@@ -73,8 +85,9 @@
 					<div class="Mdiv04">
 						댓글 &nbsp;
 					</div>	-->
-				</c:forEach>	
 			</content>	
+			
+			<!-- 페이징 -->
 			<div>
 				<ul class="ulclass">
 					<c:if test="${pageMaker.prev}">

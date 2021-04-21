@@ -78,7 +78,11 @@
 			</form>	
 			<div>
 				<div class="Vi02">
-				${BoardVO.content} 
+					<c:if test ="${!empty BoardVO.file}">
+						<img src="${path}/images/${BoardVO.file}"/>
+					</c:if>
+				
+					${BoardVO.content}
 				</div>
 				
 				<div>
@@ -101,6 +105,7 @@
 					<button class="ViBu02" onclick="cmt()">등록</button>						
 				</div>
 			</form>
+			<!-- 댓글 작성구간 -->
 			
 			<!-- 댓글 View 구간 -->
 			<div style="margin:20px 0px 120px 0px;">
@@ -122,13 +127,14 @@
 			</c:if>
 			
 			<div style="margin:10px 0px 10px 0px; padding:0px 0px 10px 10px; border-bottom:1px solid #F2F2F2;">
-			${BoCommentVO.cocontent}
+				${BoCommentVO.cocontent}
 			</div>	
 			</c:forEach>
 			<!-- 반복 -->	
 			
 			</div>
-			<!-- 댓글 구간 -->			
+			<!-- 댓글 구간 -->
+			<!-- 댓글 View 구간 -->			
          </content>	
 	</div>				
 	<footer>

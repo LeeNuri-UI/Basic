@@ -96,18 +96,17 @@ public class HomeController {
 	}
 	
 	
+	
 	//User 관리
 	//회원가입
 	@GetMapping("/JoinAction")
     public String joinAction(UserVO uv, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
-        System.out.println("/JoinAction POST방식 입니다. 왔나요?");
+		response.setContentType("text/html; charset=UTF-8");
         
-      //Inject된 UserService를 실행.
+        //Inject된 UserService를 실행.
         uService.insert(uv);
-		
-        //회원가입되었음을 출력
-        response.setContentType("text/html; charset=UTF-8");
-		
+
+        //회원가입 되었음을 화면에 출력
         PrintWriter out = response.getWriter();
 		out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
 		out.println("<script>document.location.href='"+request.getContextPath()+"/Login';</script>");
@@ -123,7 +122,6 @@ public class HomeController {
 		
 		int result = uService.idChk(uv);
 		
-		System.out.println("왔나요?"+result);
 		return result;
 	}
 	
@@ -134,7 +132,6 @@ public class HomeController {
 		
 		int result = uService.unameChk(uv);
 		
-		System.out.println("왔나요?"+result);
 		return result;
 	}
 	
@@ -154,7 +151,8 @@ public class HomeController {
         	
         	//HttpSession의 "UserVO" 속성에 User 정보저장
         	session.setAttribute("UserVO", UserVO);
- 
+        	
+        	//바로 Main페이지로 이동
             PrintWriter out = response.getWriter();
     		out.println("<script>document.location.href='/Board/Main';</script>");
     		out.close();          
@@ -165,77 +163,67 @@ public class HomeController {
 	//로그아웃
 	@RequestMapping(value = "/LoginoutAction")
     public String LoginoutAction(UserVO uv, HttpSession session, HttpServletResponse response)throws IOException,Exception{
-			response.setContentType("text/html; charset=UTF-8"); 
-        	
-			session.invalidate();
-    		PrintWriter out = response.getWriter();
-    		out.println("<script>alert('로그아웃 되었습니다.');</script>");
-    		out.println("<script>document.location.href='/Board/Main';</script>");
-    		out.close();                 
-        return null;
+		response.setContentType("text/html; charset=UTF-8"); 
+    	
+		//세션 종료 메소드 실행
+		session.invalidate();
+		
+		//로그아웃 되었음을 화면에 출력
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그아웃 되었습니다.');</script>");
+		out.println("<script>document.location.href='/Board/Main';</script>");
+		out.close();                 
+   
+		return null;
     }
 	
 	
 	//게시판 관리
 	//글쓰기
 	@PostMapping("/WriteAction")
-		public String writeAction(BoardVO bv, HttpSession session, RedirectAttributes rttr) throws Exception{
-		    System.out.println(bv);
-		    
-		    //session 부르고 값 BoardVO에 저장하기
-			UserVO user = (UserVO)session.getAttribute("UserVO");
-			int unum = user.getUnum();
-			String uname = user.getUname();
-			bv.setUnum(unum);
-			bv.setUname(uname);
-		
-			// 파일 업로드 처리
-			String fileName=null;
-			MultipartFile uploadFile = bv.getUploadFile();
-			if (!uploadFile.isEmpty()) {
-				String originalFileName = uploadFile.getOriginalFilename();
-				String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
-				UUID uuid = UUID.randomUUID();	//UUID 구하기
-				fileName=uuid+"."+ext;
-				uploadFile.transferTo(new File("C:\\Users\\apfhd\\Desktop\\Spring\\BasicBoard\\src\\main\\webapp\\resources\\fileName\\" + fileName));
-			}
-			bv.setFile(fileName);
-			
-			bService.boardInsert(bv);
-		
-			rttr.addFlashAttribute("msg", "성공");
-		
-		return "redirect:/List";
-	}
+	public String writeAction(BoardVO bv, HttpSession session, RedirectAttributes rttr) throws Exception{
+	    
+	    //session 부르고 값 BoardVO에 저장하기
+		UserVO user = (UserVO)session.getAttribute("UserVO");
+		int unum = user.getUnum();
+		String uname = user.getUname();
+		bv.setUnum(unum);
+		bv.setUname(uname);
 	
-	//리스트화면
-	@GetMapping("/List")
-    public String listAll(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
-        System.out.println("전체목록 페이지");
-        logger.info(cri.toString());
-       
-        model.addAttribute("BoardList", bService.listAll(cri));
-        
-        PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCount());
+		// 파일 업로드 처리
+		String fileName=null;
+		MultipartFile uploadFile = bv.getUploadFile();
+		if (!uploadFile.isEmpty()) {
+			String originalFileName = uploadFile.getOriginalFilename();
+			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+			UUID uuid = UUID.randomUUID();	//UUID 구하기
+			fileName=uuid+"."+ext;
+			uploadFile.transferTo(new File("C:\\Users\\apfhd\\Desktop\\file\\" + fileName)); //경로
+		}
 		
-		model.addAttribute("pageMaker", pageMaker);
-        
-		return "/Main";
-    }
+		bv.setFile(fileName);
+		
+		bService.boardInsert(bv);
+		
+		//성공됨을 알리는데 굳이 알리지 않아도 될 거 같지만 지우지 않는다.
+		rttr.addFlashAttribute("msg", "성공");
+	
+		return "redirect:/Main";
+	}
 	
 	//글 상세보기
 	@GetMapping("/View")
     public void detail(@RequestParam("bnum") int bnum,Model model) throws Exception{
-		System.out.println(bnum);
-			
+		
+		//상세보기 메소드실행하고 BoardVO에 담는다.
 		BoardVO BoardVO = bService.detail(bnum);
 		
+		//게시판 띄어쓰기 적용
 		String str1 = BoardVO.getContent();
 		str1 = str1.replace("\r\n", "<br>");
 		BoardVO.setContent(str1);
 		
+		//화면에 뿌려준다
         model.addAttribute("BoardVO",BoardVO); 
         
         //댓글 조회
@@ -249,8 +237,10 @@ public class HomeController {
 	//글 수정하기 화면
 	@GetMapping("/BoardModi")
 	public String boardModi(int bnum,Model model) throws Exception {
-       
+		
+		//상세보기 메소드실행하고 BoardVO에 담는다.
 		BoardVO BoardVO = bService.detail(bnum);
+		//수정할 부분에 보여주기 위함
 		model.addAttribute("BoardVO",BoardVO);
         
 		return "/BoardModi";
@@ -259,27 +249,30 @@ public class HomeController {
 	//글 수정하기 POST
 	@PostMapping("/UpdateAction")
     public String updateAction(BoardVO bv,Model model) throws Exception{
+		
 		bService.update(bv);
 		
-        return "redirect:/List";
+        return "redirect:/Main";
     }
 	
 	//글 삭제하기
 	@GetMapping("/deleteBoard")
 	public String getDelete(@RequestParam("bnum") int bnum) throws Exception{
-		System.out.println("bnum?"+bnum);
+		
 		bService.delete(bnum);
 		
-		return "redirect:/List";
+		return "redirect:/Main";
 	}
 	
 	//이전글
 	@GetMapping("/Before")
 	public void before(@RequestParam("bnum") int bnum, HttpServletRequest request, HttpServletResponse response)throws IOException,Exception{
 		response.setContentType("text/html; charset=UTF-8"); 
-			
+		
+		//Mapper에서 담아온 글번호를 board에 담아준다.
 		Integer board = bService.before(bnum);		
 		
+		// board값 없으면 처음 글있으면 있는 값 받아서 주소로 이동
 		if(board == null) {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('가장 처음 글입니다.');history.go(-1)</script>");
@@ -308,18 +301,17 @@ public class HomeController {
 	//댓글작성
 	@PostMapping("/CommentsAction")
 	public String commentsAction(BoCommentVO bcv, HttpSession session, RedirectAttributes rttr)throws Exception{
-		System.out.println("여기왔나요?");
 		
 		cService.commentsIsert(bcv);
 		
+		//작성된 화면으로 이동하기 위해
 		return "redirect:/View?bnum="+bcv.getBnum();
 	}
 	
 	//댓글 수정하기 화면
 	@GetMapping("/View2")
     public void detailCMT(@RequestParam("bnum") int bnum,@RequestParam("conum") int conum,Model model, HttpServletRequest request) throws Exception{
-		System.out.println(bnum);
-		System.out.println(conum);
+		//상세보기 화면 코드 복사하고 수정하기 위한 값만 따로 넣어줌
 		
 		BoardVO BoardVO = bService.detail(bnum);
 		
@@ -348,6 +340,7 @@ public class HomeController {
 	
 		cService.updateComments(bcv);
 		
+		//수정된 화면으로 다시 보여준다
 		return "redirect:/View?bnum="+bcv.getBnum();
 	}
 	
@@ -359,7 +352,7 @@ public class HomeController {
 		//메소드
 		cService.deleteComments(conum);
 		
-		//삭제됨을 알린 후 내가 보던 해당 리스트로 이동시킨다.
+		//삭제됨을 알린 후 내가 보던 해당 리스트로 이동시킨다. -> 수정예정 삭제하고 새로고침 눌러야 화면확인 가능해서 수정해야한다.
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('댓글이 삭제되었습니다.');history.go(-3)</script>");
 		out.close();
