@@ -197,7 +197,7 @@ public class HomeController {
 				String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
 				UUID uuid = UUID.randomUUID();	//UUID 구하기
 				fileName=uuid+"."+ext;
-				uploadFile.transferTo(new File("C:\\Users\\apfhd\\Desktop\\Spring\\fileName\\" + fileName));
+				uploadFile.transferTo(new File("C:\\Users\\apfhd\\Desktop\\Spring\\BasicBoard\\src\\main\\webapp\\resources\\fileName\\" + fileName));
 			}
 			bv.setFile(fileName);
 			

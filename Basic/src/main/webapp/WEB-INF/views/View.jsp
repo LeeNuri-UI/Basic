@@ -78,7 +78,7 @@
 			</form>	
 			<div>
 				<div class="Vi02">
-				${BoardVO.content}
+				${BoardVO.content} 
 				</div>
 				
 				<div>

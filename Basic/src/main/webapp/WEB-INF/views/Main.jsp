@@ -28,7 +28,7 @@
 						<td colspan="3"style="color:#848484;">&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/>
 						&nbsp;&nbsp;&nbsp;CATEGORY : <b>${BoardVO.cate02}</b></td>
 						<td style="margin:0px 10px 0px 10px; color:#848484; float:right;">${BoardVO.viewcount}&nbsp;읽음</td>
-						<td rowspan="4">${BoardVO.file}</td>
+						<td rowspan="4"><img src="${BoardVO.file}"></td>
 					</tr>
 					
 					<tr>
