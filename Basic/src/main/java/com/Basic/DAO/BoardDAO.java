@@ -13,6 +13,8 @@ public interface BoardDAO {
 	
 	public int listCount() throws Exception; //총 갯수
 	
+	public void bcoCount(int bnum) throws Exception; //댓글수
+	
 	public BoardVO detail(Integer bnum) throws Exception; //상세보기
 	
 	public void viewCount(int bnum) throws Exception; //조회수

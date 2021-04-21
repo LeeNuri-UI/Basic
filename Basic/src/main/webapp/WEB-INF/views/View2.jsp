@@ -11,15 +11,32 @@
 	<link href="${path}/resources/css/View.css" rel="stylesheet" >
 	
 	<script type="text/javascript">
-	 function cmtModi(){ 
-		 if(document.Comments2.cocontent.value == ""){
+	 function cmt(){ 
+		 if(${UserVO.uname == null}){
+			alert("로그인시 이용가능합니다.");
+	    	return;
+		 }else if(document.Comments.cocontent.value == ""){
     		alert("내용을 입력하세요");
-    		document.Comments2.cocontent.focus();
+    		document.Comments.cocontent.focus();
     		return;
     	}else{
     		alert("작성하시겠습니까?");
-    		document.Comments2.action ="<%=request.getContextPath()%>/CommentsModiAction";
-    		document.Comments2.method = "post";			
+    		document.Comments.action ="<%=request.getContextPath()%>/CommentsAction";
+    		document.Comments.method = "post";			
+    	}
+	}
+	 
+ 	function deleteBoard(){ 
+		if(${UserVO.uname == null}){
+			alert("로그인시 이용가능합니다.");
+	    	return;
+		}else if(${UserVO.uname == BoardVO.uname}){
+			if(confirm("삭제하시겠습니까?")){
+				document.location.href ="${path}/deleteBoard?bnum=${BoardVO.bnum}";
+				return;
+			}else return;
+    	}else{
+    		return;
     	}
 	}
 	</script>
@@ -30,47 +47,53 @@
 	<jsp:include page="Background.jsp" flush="true"/>
 	<jsp:include page="MainHeader.jsp" flush="true"/>
 		
-	<div class="rap2">			
-		<content>  
-			<table class="Vitable01">
-				<tr>
-					<td width="100px;">${BoardVO.cate01}</td>
-					<td>${BoardVO.cate02}</td>
-					<td colspan="4">
-						<a href="${path}/Before?bnum=${BoardVO.bnum}"><b>&nbsp;PRE</b></a>
-						<a href="${path}/List"><b>&nbsp;LIST</b></a>
-						<a href="${path}/After?bnum=${BoardVO.bnum}"><b>&nbsp;NEXT&nbsp;</b></a>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6"><h2>${BoardVO.sub}</h2></td>
-				</tr>
-				<tr>
-					<td>작  성  자</td>
-					<td>${BoardVO.uname}</td>
-					<td colspan="3"></td>
-					<td width="120px;" rowspan="2"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/></td>
-					<td colspan="2"></td>
-					<td colspan="2">${BoardVO.viewcount}&nbsp;읽음</td>
-				</tr>
-			</table>	
+	<div class="rap2">		
+		<content> 
+			<form name="Views"> 
+				<table class="Vitable01">
+					<tr>
+						<td width="100px;">${BoardVO.cate01}</td>
+						<td>${BoardVO.cate02}</td>
+						<td colspan="4">
+							<a href="${path}/Before?bnum=${BoardVO.bnum}"><b>&nbsp;PRE</b></a>
+							<a href="${path}/Main"><b>&nbsp;LIST</b></a>
+							<a href="${path}/After?bnum=${BoardVO.bnum}"><b>&nbsp;NEXT&nbsp;</b></a>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6"><h2>${BoardVO.sub}</h2></td>
+					</tr>
+					<tr>
+						<td> WRITER </td>
+						<td><b>${BoardVO.uname}</b></td>
+						<td colspan="3"></td>
+						<td width="120px;" rowspan="2"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/></td>
+						<td colspan="2"></td>
+						<td colspan="2">${BoardVO.viewcount}&nbsp;읽음</td>
+					</tr>
+				</table>
+			</form>	
 			<div>
 				<div class="Vi02">
-				${BoardVO.content}
+					<c:if test ="${!empty BoardVO.file}">
+						<img src="${path}/images/${BoardVO.file}"/>
+					</c:if>
+					<br>
+					${BoardVO.content}
 				</div>
 				
 				<div>
 				<c:if test="${UserVO.unum eq BoardVO.unum }">
 					<a href="${path}/BoardModi?bnum=${BoardVO.bnum}"><button class="ViBu02">MODIFY</button></a>
-					<a href="${path}/delete?bnum=${BoardVO.bnum}"><button class="ViBu02">DELETE</button></a>
+					<button class="ViBu02" onclick="deleteBoard()">DELETE</button>
 				</c:if>
 				</div>				
 			</div>
 					
-			<div class="Vi03"><b>COMMENTS</b></div>
+			<div class="Vi03"><b>COMMENTS&nbsp;&nbsp;&nbsp;"${BoardVO.bcocount}"</b></div>
 			
 			<!-- 댓글 작성구간 -->
 			<form name="Comments">

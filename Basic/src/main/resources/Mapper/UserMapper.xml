@@ -88,6 +88,13 @@
     ]]>
 	</select>
 	
+	<!-- 댓글 갯수 -->
+    <update id="bcoCount" parameterType="int">
+    <![CDATA[
+        update board set bcocount = (select COUNT(*) from bocomment where bnum = #{bnum} and delyn = "N") where bnum = #{bnum};
+    ]]>
+    </update>
+	
 	
 	
 	<!-- 댓글 작성 -->

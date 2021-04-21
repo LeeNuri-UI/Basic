@@ -22,7 +22,6 @@ public class BoardServiceImpl implements BoardService {
 	    public void boardInsert(BoardVO bv) throws Exception {
 	 		
 	 		dao.boardInsert(bv);
-	 		  
 	    }
 	 	
 	 	//리스트
@@ -45,6 +44,7 @@ public class BoardServiceImpl implements BoardService {
 	    public BoardVO detail(Integer bnum) throws Exception {
 	 		//조회수
 	 		dao.viewCount(bnum);
+	 		dao.bcoCount(bnum);
 	        return dao.detail(bnum);
 	    }
 	 	

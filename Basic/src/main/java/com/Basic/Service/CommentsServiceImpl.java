@@ -25,7 +25,7 @@ public class CommentsServiceImpl implements CommentsService {
 	//댓글 조회
 	@Override
     public List<BoCommentVO> list(int bnum) throws Exception {
-    	
+		
 		return cdao.list(bnum);	
     }
 	

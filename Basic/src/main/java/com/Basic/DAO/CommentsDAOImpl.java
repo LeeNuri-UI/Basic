@@ -27,6 +27,7 @@ public class CommentsDAOImpl implements CommentsDAO{
     //댓글 조회
     @Override
     public List<BoCommentVO> list(int bnum) throws Exception {
+    	
     	return sqlSession.selectList(namespace+".commectsList", bnum);
 	}
     

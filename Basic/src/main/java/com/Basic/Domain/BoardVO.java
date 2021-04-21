@@ -17,7 +17,14 @@ public class BoardVO {
 	private String file;
 	private String delyn;
 	private MultipartFile uploadFile;
+	private int bcocount;
 	
+	public int getBcocount() {
+		return bcocount;
+	}
+	public void setBcocount(int bcocount) {
+		this.bcocount = bcocount;
+	}
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}

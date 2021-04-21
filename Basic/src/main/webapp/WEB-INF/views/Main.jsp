@@ -59,7 +59,7 @@
 					<tr>
 						<td colspan="4" style="color:#848484;">
 							<div class="divCmt">
-								&nbsp;&nbsp;COMMENTS : &nbsp;
+								&nbsp;&nbsp;COMMENTS : ${BoardVO.bcocount}&nbsp;
 							</div>
 						</td>
 					</tr>

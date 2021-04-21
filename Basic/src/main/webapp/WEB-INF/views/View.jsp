@@ -56,7 +56,7 @@
 						<td>${BoardVO.cate02}</td>
 						<td colspan="4">
 							<a href="${path}/Before?bnum=${BoardVO.bnum}"><b>&nbsp;PRE</b></a>
-							<a href="${path}/List"><b>&nbsp;LIST</b></a>
+							<a href="${path}/Main"><b>&nbsp;LIST</b></a>
 							<a href="${path}/After?bnum=${BoardVO.bnum}"><b>&nbsp;NEXT&nbsp;</b></a>
 						</td>
 					</tr>
@@ -81,7 +81,7 @@
 					<c:if test ="${!empty BoardVO.file}">
 						<img src="${path}/images/${BoardVO.file}"/>
 					</c:if>
-				
+					<br>
 					${BoardVO.content}
 				</div>
 				
@@ -93,7 +93,7 @@
 				</div>				
 			</div>
 					
-			<div class="Vi03"><b>COMMENTS</b></div>
+			<div class="Vi03"><b>COMMENTS&nbsp;&nbsp;&nbsp;"${BoardVO.bcocount}"</b></div>
 			
 			<!-- 댓글 작성구간 -->
 			<form name="Comments">
