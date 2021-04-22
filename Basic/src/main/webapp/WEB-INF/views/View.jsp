@@ -27,10 +27,10 @@
 	}
 	 
  	function deleteBoard(){ 
-		if(${UserVO.uname == null}){
+		if(${UserVO.unum == null}){
 			alert("로그인시 이용가능합니다.");
 	    	return;
-		}else if(${UserVO.uname == BoardVO.uname}){
+		}else if(${UserVO.unum != null}){
 			if(confirm("삭제하시겠습니까?")){
 				document.location.href ="${path}/deleteBoard?bnum=${BoardVO.bnum}";
 				return;

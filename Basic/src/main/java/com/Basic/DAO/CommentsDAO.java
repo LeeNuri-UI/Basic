@@ -3,7 +3,7 @@ package com.Basic.DAO;
 import java.util.List;
 
 import com.Basic.Domain.BoCommentVO;
-import com.Basic.Domain.BoardVO;
+
 
 
 public interface CommentsDAO {

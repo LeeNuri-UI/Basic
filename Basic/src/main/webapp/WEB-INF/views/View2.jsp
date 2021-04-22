@@ -79,7 +79,7 @@
 			<div>
 				<div class="Vi02">
 					<c:if test ="${!empty BoardVO.file}">
-						<img src="${path}/images/${BoardVO.file}"/>
+						<img src="${path}/images/${BoardVO.file}" style="width:400px; height:auto;"/>
 					</c:if>
 					<br>
 					${BoardVO.content}

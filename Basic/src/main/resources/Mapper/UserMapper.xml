@@ -86,7 +86,7 @@
     
     <!-- 게시판 진짜 삭제하기 -->
     <delete id="deleteReal" parameterType="int">
-    	delete from board where bnum = #{bnum}
+    	delete from board where bnum = #{bnum} and delyn= "Y"
     </delete>
     
     <!-- 이전글 -->
@@ -108,6 +108,26 @@
     <![CDATA[
         update board set bcocount = (select COUNT(*) from bocomment where bnum = #{bnum} and delyn = "N") where bnum = #{bnum};
     ]]>
+    </update>
+    
+    <!-- 마이페이지 리스트 -->
+    <select id="listAllY" resultType="com.Basic.Domain.BoardVO">
+    <![CDATA[    
+        select * from board where delyn = "Y"
+        order by bnum DESC limit #{pageStart}, #{perPageNum}
+    ]]>
+    </select>
+   
+    <!--마이페이지 총 갯수 -->
+    <select id="listCountY" resultType="int">
+    <![CDATA[
+        SELECT COUNT(*) FROM board WHERE bnum > 0 and delyn = "Y"
+    ]]>
+    </select>
+    
+    <!-- 글 다시 복구하기 -->
+    <update id="restoreGo" parameterType="com.Basic.Domain.BoardVO">
+        update board set delyn = "N" where bnum = #{bnum}
     </update>
 	
 	

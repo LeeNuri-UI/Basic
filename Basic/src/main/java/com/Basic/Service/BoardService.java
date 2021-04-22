@@ -24,4 +24,12 @@ public interface BoardService {
 	
 	public Integer after(Integer bnum)throws Exception; //다음글
 	
+	public List<BoardVO> listAllY(Criteria cri) throws Exception; //마이 페이지 리스트
+	
+	public int listCountY() throws Exception; //마이 페이지 총 갯수
+	
+	public void deleteReal(int bnum)throws Exception; //글 완전히 삭제하기
+	
+	public void restoreGo(BoardVO bv)throws Exception; //글 다시 복구하기
+	
 }

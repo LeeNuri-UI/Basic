@@ -1,8 +1,5 @@
 package com.Basic.Service;
 
-import java.util.List;
-
-import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.UserVO;
 import com.Basic.DAO.UserDAO;
 

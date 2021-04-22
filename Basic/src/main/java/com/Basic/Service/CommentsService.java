@@ -3,8 +3,6 @@ package com.Basic.Service;
 import java.util.List;
 
 import com.Basic.Domain.BoCommentVO;
-import com.Basic.Domain.BoardVO;
-
 
 public interface CommentsService {
 	

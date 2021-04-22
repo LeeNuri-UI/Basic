@@ -95,9 +95,10 @@ public class HomeController {
 		return "/Write";
 	}
 	
-	//마이페이지 화면
-	@GetMapping("/Mypage")
-	public String mypage(UserVO uv, HttpSession session, Model model) {
+	//메인 화면
+	@GetMapping("Mypage")
+	public String mypage(@ModelAttribute("cri") Criteria cri, UserVO uv, HttpSession session, Model model)throws Exception {
+		logger.info(cri.toString());
 		
 		UserVO user = (UserVO)session.getAttribute("UserVO");
 		int unum = user.getUnum();
@@ -107,6 +108,13 @@ public class HomeController {
 		uv.setUnum(unum);
 		uv.setUname(uname);
 		
+        model.addAttribute("BoardListY", bService.listAllY(cri));
+        
+        PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bService.listCountY());
+		
+		model.addAttribute("pageMaker", pageMaker);
 		return "/Mypage";
 	}
 	
@@ -419,5 +427,34 @@ public class HomeController {
         return null;
     }
 	
+	//글 완전 삭제하기
+	@GetMapping("/DeleteReal")
+	public String getDeleteReal(@RequestParam("bnum") int bnum, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		
+		bService.deleteReal(bnum);
+		
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('글이 완전히 삭제되었습니다.');</script>");
+		out.println("<script>document.location.href='/Board/Mypage';</script>");
+		out.close();
+		
+        return null;
+	}
+	
+	//삭제된 글 복구하기 POST
+	@RequestMapping(value="/RestoreGo",method = {RequestMethod.GET, RequestMethod.POST})
+    public String restoreGo(BoardVO bv,Model model, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		
+		bService.restoreGo(bv);
+		
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('글이 다시 복구되었습니다.');</script>");
+		out.println("<script>document.location.href='/Board/Mypage';</script>");
+		out.close();
+		
+        return null;
+    }
 }
 

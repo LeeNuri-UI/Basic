@@ -117,5 +117,32 @@
 		.Lo04:hover{
 			background-color: #2e9cdf;
 			cursor: pointer;}
+		.restore{
+			border:2px solid #2E9AFE; 
+			width:70px;
+			text-align:center; 
+			height:23px; 
+			padding:10px;
+			margin:10px 0px 0px 10px; 
+			background-color:#ffffff;
+			outline:0;
+		}
+		.restore:hover{
+			background-color: #2e9cdf;
+			cursor: pointer;}
+		.DeleteComplete{
+			border:2px solid #2E9AFE; 
+			width:70px;
+			text-align:center; 
+			height:23px; 
+			padding:10px;
+			margin:10px 0px 0px 10px; 
+			background-color:#ffffff;
+			outline:0;
+		}
+		.DeleteComplete:hover{
+			background-color: #2e9cdf;
+			cursor: pointer;}	
+		
 			
 		

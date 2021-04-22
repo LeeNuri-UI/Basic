@@ -1,12 +1,9 @@
 package com.Basic.DAO;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.UserVO;
 import org.springframework.stereotype.Repository;
 
