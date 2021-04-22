@@ -23,7 +23,7 @@
 			
 			<content> 
 				<c:forEach items="${BoardList}" var="BoardVO">
-				<table border="0;" style="width:810px; border-bottom:1px solid #BDBDBD; margin:0px 0px 0px -2px;">
+				<table border="0;" style="width:800px; border-bottom:1px solid #BDBDBD; margin:0px 0px 0px 0px;">
 					<tr>
 						<td colspan="3"style="color:#848484;">
 							&nbsp;&nbsp;<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${BoardVO.writedate}"/>

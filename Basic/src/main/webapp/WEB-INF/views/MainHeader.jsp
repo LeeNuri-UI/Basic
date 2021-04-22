@@ -22,11 +22,13 @@
 			<c:if test ="${UserVO.admin == 'Y'}">
 				<li class="ulli"><a href="${path}/Main"><b>HOME</b></a></li>
 				<li class="ulli"><a href="${path}/LoginoutAction"><b>LOGOUT</b></a></li>
+				<li class="ulli"><a href="${path}/Mypage"><b>MYPAGE</b></a></li>
 				<li class="ulli"><b>${UserVO.uname}님 환영합니다.관리자입니다.</b></li>
 			</c:if>
 			<c:if test ="${UserVO.admin == 'N'}">
 				<li class="ulli"><a href="${path}/Main"><b>HOME</b></a></li>
 				<li class="ulli"><a href="${path}/LoginoutAction"><b>LOGOUT</b></a></li>
+				<li class="ulli"><a href="${path}/Mypage"><b>MYPAGE</b></a></li>
 				<li class="ulli"><b>${UserVO.uname}님 환영합니다.</b></li>
 			</c:if>
 		</ul>

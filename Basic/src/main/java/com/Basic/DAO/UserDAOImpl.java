@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+
+import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.UserVO;
 import org.springframework.stereotype.Repository;
 
@@ -49,6 +51,27 @@ public class UserDAOImpl implements UserDAO{
     	return sqlSession.selectOne(namespace+".login", uv);
     }
     
+    //비밀번호 확인하기
+    @Override
+    public int pwUdate(UserVO uv) throws Exception {
+    	
+    	int result = sqlSession.selectOne(namespace+".pwUdate", uv);
+    	return result;
+    }
+    
+    //비밀번호 변경하기
+    @Override
+    public void pwUdateGo(UserVO uv) throws Exception {
+    	
+    	sqlSession.update(namespace+".pwUdateGo", uv);     	
+	}
+    
+    //닉네임 변경하기
+    @Override
+    public void nickUpdateGo(UserVO uv) throws Exception {
+    	
+    	sqlSession.update(namespace+".nickUpdateGo", uv);     	
+	}
    
 
 }

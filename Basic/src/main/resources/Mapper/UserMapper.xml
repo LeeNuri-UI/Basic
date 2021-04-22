@@ -26,6 +26,21 @@
     	select * from user where uid= #{uid} and upass= #{upass}
 	</select>
 	
+	<!-- 비밀번호 확인 -->
+	<select id="pwUdate" resultType="int">
+		select COUNT(*) from user where upass = #{upass} and uid= #{uid}
+	</select>
+	
+	<!-- 비밀번호 변경하기 -->
+    <update id="pwUdateGo" parameterType="com.Basic.Domain.BoardVO">
+        update user set upass=#{upass} where uid = #{uid}
+    </update>
+    
+    <!-- 비밀번호 변경하기 -->
+    <update id="nickUpdateGo" parameterType="com.Basic.Domain.BoardVO">
+        update user set uname=#{uname} where uid = #{uid}
+    </update>
+	
 	
 	
 	<!-- 글 작성 -->
@@ -88,7 +103,7 @@
     ]]>
 	</select>
 	
-	<!-- 댓글 갯수 -->
+	<!-- 댓글 갯수 테이블 소속은 보드이므로 보드로 넣음-->
     <update id="bcoCount" parameterType="int">
     <![CDATA[
         update board set bcocount = (select COUNT(*) from bocomment where bnum = #{bnum} and delyn = "N") where bnum = #{bnum};

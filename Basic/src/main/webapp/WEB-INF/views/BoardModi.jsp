@@ -78,8 +78,7 @@
             </table>
             
             <div class="Wi01">   
-                <textarea class="textarea" name="content" id="content">${BoardVO.content}</textarea>
-				<input type="file" name="file" id="file" accept="image/*,gif/* " class="File01">   
+                <textarea class="textarea" name="content" id="content">${BoardVO.content}</textarea>  
                 <button class="WiBu01" onclick="UpdateBT()">WRITE</button>
                 <input type="button" class="WiBu02" value="CANCEl" onclick="goBack()">
             </div>  
@@ -88,7 +87,7 @@
 	</div>				
 	
 	<footer>
-		<jsp:include page="Footer.jsp" flush="true"/>
+		
 	</footer>
 	
 	</div>

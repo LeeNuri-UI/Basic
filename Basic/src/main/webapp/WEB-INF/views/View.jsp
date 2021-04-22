@@ -101,7 +101,7 @@
 					<input type="hidden" name="bnum" id="bnum" value="${BoardVO.bnum}">
 					<input type="hidden" name="uname" id="uname" value="${UserVO.uname}">
 					
-					<textarea name="cocontent" id="cocontent" class="ViRe01" placeholder="댓글을 남겨보세요"></textarea>		
+					<textarea name="cocontent" id="cocontent" class="ViRe01" maxlength="300" placeholder="댓글을 남겨보세요"></textarea>		
 					<button class="ViBu02" onclick="cmt()">등록</button>						
 				</div>
 			</form>

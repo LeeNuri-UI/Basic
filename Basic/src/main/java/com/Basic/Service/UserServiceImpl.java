@@ -1,6 +1,8 @@
 package com.Basic.Service;
 
 import java.util.List;
+
+import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.UserVO;
 import com.Basic.DAO.UserDAO;
 
@@ -41,6 +43,28 @@ public class UserServiceImpl implements UserService {
     public UserVO login(UserVO uv) throws Exception {
 		
 		return ud.login(uv);
+    }
+	
+	//비밀번호 확인
+	@Override
+	public int pwUdate(UserVO uv) throws Exception {
+		
+		int result = ud.pwUdate(uv);
+		return result;
+	}
+	
+	//비밀번호 변경하기
+ 	@Override
+    public void pwUdateGo(UserVO uv) throws Exception {
+ 		
+ 		ud.pwUdateGo(uv);
+    }
+ 	
+ 	//닉네임 변경하기
+ 	@Override
+    public void nickUpdateGo(UserVO uv) throws Exception {
+ 		
+ 		ud.nickUpdateGo(uv);
     }
 
 }

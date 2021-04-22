@@ -1,6 +1,8 @@
 package com.Basic.DAO;
 
 import java.util.List;
+
+import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.UserVO;
 
 public interface UserDAO {
@@ -11,4 +13,10 @@ public interface UserDAO {
 	public int unameChk(UserVO uv) throws Exception; //닉네임 중복 체크
 	
 	public UserVO login(UserVO uv) throws Exception; //로그인
+	
+	public int pwUdate(UserVO uv) throws Exception; //비밀번호 확인
+	
+	public void pwUdateGo(UserVO uv) throws Exception; //비밀번호 변경
+	
+	public void nickUpdateGo(UserVO uv) throws Exception; //닉네임 변경하기
 }

@@ -38,7 +38,6 @@
 						<h1 style="margin: 20px 0px 20px 0px; text-align:center;"> Login</h1>
 						<input type="text" placeholder="ID" maxlength="20" class="Lo02" name="uid" id="uid">
 						<input type="password" placeholder="FW" maxlength="20" class="Lo02" name="upass" id="upass">
-						
 						<button class="Lo03" onclick="LoginBT()">Login</button>				
 						<a href="${path}/Join"><button class="Lo03">Join Us</button></a>
 					</form>				

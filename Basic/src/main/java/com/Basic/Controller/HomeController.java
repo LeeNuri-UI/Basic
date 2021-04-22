@@ -95,6 +95,21 @@ public class HomeController {
 		return "/Write";
 	}
 	
+	//마이페이지 화면
+	@GetMapping("/Mypage")
+	public String mypage(UserVO uv, HttpSession session, Model model) {
+		
+		UserVO user = (UserVO)session.getAttribute("UserVO");
+		int unum = user.getUnum();
+		String uname = user.getUname();
+		String uid = user.getUid();
+		uv.setUid(uid);
+		uv.setUnum(unum);
+		uv.setUname(uname);
+		
+		return "/Mypage";
+	}
+	
 	
 	
 	//User 관리
@@ -298,6 +313,8 @@ public class HomeController {
 		}
 	}
 	
+	
+	//댓글관리
 	//댓글작성
 	@PostMapping("/CommentsAction")
 	public String commentsAction(BoCommentVO bcv, HttpSession session, RedirectAttributes rttr)throws Exception{
@@ -357,5 +374,50 @@ public class HomeController {
 		out.println("<script>alert('댓글이 삭제되었습니다.');history.go(-3)</script>");
 		out.close();
 	}
+	
+	
+	//마이페이지 관리
+	//비밀번호 확인
+	@ResponseBody
+	@PostMapping("/PWUdate")
+	public int pwUdate(UserVO uv) throws Exception {
+		
+		int result = uService.pwUdate(uv);
+		System.out.println("옴?"+result);
+		return result;
+	}
+	
+	//비밀번호 변경하기
+	@PostMapping("/PWUdateGo")
+    public String pwUdateGo(UserVO uv,Model model,HttpServletResponse response) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		
+		uService.pwUdateGo(uv);
+		
+		//비밀번호 변경되었음을 알린다.
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('비밀번호가 변경되었습니다.');</script>");
+		out.println("<script>document.location.href='/Board/Mypage';</script>");
+		out.close();
+		
+        return null;
+    }
+	
+	//닉네임 변경하기
+	@PostMapping("/NickUpdateGo")
+    public String nickUpdateGo(UserVO uv,Model model,HttpServletResponse response) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		
+		uService.nickUpdateGo(uv);
+		
+		//닉네임이 변경되었음을 알린다.
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('닉네임이 변경되었습니다. 변경된 닉네임 확인은 로그아웃 후 확인이 가능합니다.');</script>");
+		out.println("<script>document.location.href='/Board/Mypage';</script>");
+		out.close();
+		
+        return null;
+    }
+	
 }
 
