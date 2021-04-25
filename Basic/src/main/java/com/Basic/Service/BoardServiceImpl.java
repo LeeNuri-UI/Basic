@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import com.Basic.DAO.BoardDAO;
 import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.Criteria;
+import com.Basic.Domain.SearchCriteria;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -26,16 +27,16 @@ public class BoardServiceImpl implements BoardService {
 	 	
 	 	//리스트
 	 	@Override
-	    public List<BoardVO> listAll(Criteria cri) throws Exception {
+	    public List<BoardVO> listAll(SearchCriteria scri) throws Exception {
 	 
-	        return dao.listAll(cri);
+	        return dao.listAll(scri);
 	    }
 	 	
 	 	//총 갯수
 	 	@Override
-	    public int listCount() throws Exception {
+	    public int listCount(SearchCriteria scri) throws Exception {
 	 
-	        return dao.listCount();
+	        return dao.listCount(scri);
 	    }
 	 	
 	 	//상세보기

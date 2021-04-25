@@ -18,6 +18,7 @@ import com.Basic.Domain.BoCommentVO;
 import com.Basic.Domain.BoardVO;
 import com.Basic.Domain.Criteria;
 import com.Basic.Domain.PageMaker;
+import com.Basic.Domain.SearchCriteria;
 import com.Basic.Service.BoardService;
 import com.Basic.Service.CommentsService;
 import com.Basic.Service.UserService;
@@ -61,14 +62,14 @@ public class HomeController {
 	//각 화면 JSP이동
 	//메인 화면
 	@GetMapping("/Main")
-	public String main(@ModelAttribute("cri") Criteria cri, Model model)throws Exception {
-		logger.info(cri.toString());
+	public String main(@ModelAttribute("scri") SearchCriteria scri, Model model)throws Exception {
+		logger.info(scri.toString());
 	       
-        model.addAttribute("BoardList", bService.listAll(cri));
+        model.addAttribute("BoardList", bService.listAll(scri));
         
         PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(bService.listCount());
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(bService.listCount(scri));
 		
 		model.addAttribute("pageMaker", pageMaker);
 		return "/Main";

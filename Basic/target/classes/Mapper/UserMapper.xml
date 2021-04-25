@@ -51,18 +51,29 @@
     
     <!-- 게시판 리스트보기 -->
     <select id="listAll" resultType="com.Basic.Domain.BoardVO">
-    <![CDATA[    
-        select * from board where delyn = "N"
+       
+        select * from board where delyn = "N" <include refid="search"></include>
         order by bnum DESC limit #{pageStart}, #{perPageNum}
-    ]]>
+   
     </select>
     
     <!-- 총 갯수 -->
     <select id="listCount" resultType="int">
-    <![CDATA[
-        SELECT COUNT(*) FROM board WHERE bnum > 0 and delyn = "N"
-    ]]>
+    
+        SELECT COUNT(*) FROM board WHERE bnum > 0 <include refid="search"></include> 
+        and delyn = "N"
+   
     </select>
+    
+    <!-- 검색하기 -->
+    <sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'sub'.toString()">AND sub like CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'content'.toString()">AND content like CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'uname'.toString()">AND uname like CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'subcontent'.toString()">AND (sub like CONCAT('%',#{keyword},'%')) or (content like CONCAT('%',#{keyword},'%'))</if>
+		</if>
+	</sql>
     
     <!-- 게시판 상세보기 -->
     <select id="detailView" resultType="com.Basic.Domain.BoardVO">
